@@ -3,13 +3,58 @@
 registry = "test"
 
 [[package]]
+name = "chipioindustries/llama"
+version = "1.2.1"
+dependencies = []
+
+[[package]]
 name = "chipioindustries/pounce"
 version = "0.1.0"
-dependencies = [["Roact", "roblox/roact@1.4.2"]]
+dependencies = [["Llama", "chipioindustries/llama@1.2.1"], ["ReplicationMiddleware", "chipioindustries/replication-middleware@1.0.0"], ["Roact", "roblox/roact@1.4.2"], ["RoactRodux", "roblox/roact-rodux@0.3.0"], ["Rodux", "chipioindustries/rodux@3.0.4"]]
+
+[[package]]
+name = "chipioindustries/rapscallion"
+version = "1.0.4"
+dependencies = [["Llama", "freddylist/llama@1.1.1"]]
+
+[[package]]
+name = "chipioindustries/remotes"
+version = "1.0.1"
+dependencies = [["Llama", "freddylist/llama@1.1.1"], ["Rapscallion", "chipioindustries/rapscallion@1.0.4"], ["Signal", "chipioindustries/signal@1.0.3"]]
+
+[[package]]
+name = "chipioindustries/replication-middleware"
+version = "1.0.0"
+dependencies = [["Llama", "freddylist/llama@1.1.1"], ["Remotes", "chipioindustries/remotes@1.0.1"], ["Rodux", "chipioindustries/rodux@3.0.4"]]
+
+[[package]]
+name = "chipioindustries/rodux"
+version = "3.0.4"
+dependencies = []
+
+[[package]]
+name = "chipioindustries/signal"
+version = "1.0.3"
+dependencies = []
+
+[[package]]
+name = "freddylist/llama"
+version = "1.1.1"
+dependencies = []
 
 [[package]]
 name = "roblox/roact"
 version = "1.4.2"
+dependencies = []
+
+[[package]]
+name = "roblox/roact-rodux"
+version = "0.3.0"
+dependencies = [["Roact", "roblox/roact@1.4.2"], ["Rodux", "roblox/rodux@3.0.0"]]
+
+[[package]]
+name = "roblox/rodux"
+version = "3.0.0"
 dependencies = []
 
 [[package]]

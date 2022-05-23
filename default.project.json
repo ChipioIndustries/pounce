@@ -2,10 +2,17 @@
 	"name": "pounce",
 	"tree": {
 		"$className": "DataModel",
-	
+
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
-			"$path": "src/shared"
+			"$path": "src/shared",
+			"DevPackages": {
+				"$path": "DevPackages"
+			},
+			"Packages": {
+				"$className": "Folder",
+				"$path": "Packages"
+			}
 		},
 
 		"ServerScriptService": {

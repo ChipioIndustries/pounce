@@ -1,0 +1,5 @@
+local CONFIG = {
+
+}
+
+return CONFIG
