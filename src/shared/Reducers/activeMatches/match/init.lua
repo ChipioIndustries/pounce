@@ -19,18 +19,23 @@ local function matchReducer(state, action)
 				action.subAction
 			)
 		})
-	elseif action.type == Actions.addField then
+	elseif action.type == Actions.addPile then
 		return Llama.Dictionary.join(state, {
 			[HttpService:GenerateGUID(false)] = {
-				[Cards:getSignature(action.suit, 1)] = tostring(action.playerId)
+				cards = {
+					[Cards:getSignature(action.suit, 1)] = tostring(action.playerId)
+				},
+				position = action.position
 			}
 		})
 	elseif action.type == Actions.changeField then
 		return Llama.Dictionary.join(state, {
-			[action.fieldId] = pileReducer(
-				state[action.playerId],
-				action.subAction
-			)
+			[action.pileId] = Llama.Dictionary.join(state[action.pileId], {
+				cards = pileReducer(
+					state[action.pileId].cards,
+					action.subAction
+				)
+			})
 		})
 	end
 

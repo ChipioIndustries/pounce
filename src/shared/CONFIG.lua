@@ -34,6 +34,7 @@ local CONFIG = {
 	PadCount = 4;
 	StackSize = 13;
 	DeckViewableCardsCount = 3;
+	MinimumPileDistance = 0.1;
 }
 
 return CONFIG

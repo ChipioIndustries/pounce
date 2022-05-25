@@ -9,8 +9,6 @@ local Actions = require(modules.Actions)
 
 local Cards = require(ReplicatedStorage.Utilities.Cards)
 
--- TODO: HAVE SCREEN POSITIONS FOR PILES
-
 local function pileReducer(state, action)
 	if action.type == Actions.addCardToPile then
 		local keys = Llama.Dictionary.keys(state)

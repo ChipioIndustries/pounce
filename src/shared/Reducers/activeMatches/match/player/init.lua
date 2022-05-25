@@ -7,7 +7,7 @@ local Llama = require(ReplicatedStorage.Packages.Llama)
 local modules = ReplicatedStorage.Modules
 local Actions = require(modules.Actions)
 
-local Selectors = require(ReplicatedStorage.Selectors)
+local Selectors -- required below to prevent cyclic dependency
 
 local stackReducer = require(script.stack)
 local columnReducer = require(script.column)
@@ -47,6 +47,7 @@ local function playerReducer(state, action)
 			deckPosition = position
 		})
 	elseif action.type == Actions.setPlayerPounced then
+		Selectors = Selectors or require(ReplicatedStorage.Selectors)
 		return Llama.Dictionary.join(state, {
 			-- player can't pounce if someone else beat them to it
 			pounced = if not Selectors.getIsMatchFinished(action.matchId) then true else false
