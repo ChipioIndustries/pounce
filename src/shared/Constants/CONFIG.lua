@@ -35,6 +35,10 @@ local CONFIG = {
 	StackSize = 13;
 	DeckViewableCardsCount = 3;
 	MinimumPileDistance = 0.1;
+	Responses = {
+		NotInMatch = "Player is not currently in a match";
+		GameAlreadyEnded = "Someone has already pounced!";
+	};
 }
 
 return CONFIG

@@ -10,14 +10,13 @@ local packages = ReplicatedStorage.Packages
 local Roact = require(packages.Roact)
 local RoactRodux = require(packages.RoactRodux)
 local Store = require(ReplicatedStorage.Modules.Store)
+local App = require(ReplicatedStorage.Components.App)
 
 local appHandle = Roact.mount(
 	Roact.createElement(RoactRodux.StoreProvider, {
 		store = Store,
 	}, {
-		Roact.createElement("ScreenGui", {
-			ResetOnSpawn = false,
-		})
+		Roact.createElement(App)
 	}),
 	playerGui
 )

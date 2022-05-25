@@ -1,1 +1,3 @@
-require(game.ReplicatedStorage.Modules.Store) -- TODO: pawbs
+local ServerScriptService = game:GetService("ServerScriptService")
+
+require(ServerScriptService.RequestProcessors)

@@ -13,6 +13,8 @@ local Cards = require(utilities.Cards)
 local matchReducer = require(script.match)
 
 local function activeMatchesReducer(state, action)
+	state = state or {}
+
 	if action.type == Actions.addMatch then
 		local players = {}
 
