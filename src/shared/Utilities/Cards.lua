@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local CONFIG = require(ReplicatedStorage.CONFIG)
+local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 
 local RNG = Random.new()
 

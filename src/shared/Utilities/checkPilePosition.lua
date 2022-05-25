@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local CONFIG = require(ReplicatedStorage.CONFIG)
+local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local Store = require(ReplicatedStorage.Modules.Store)
 
 -- pulling out the intense 5th-grade math for this one

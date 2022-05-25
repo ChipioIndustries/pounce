@@ -1,12 +1,11 @@
 local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local CONFIG = require(ReplicatedStorage.CONFIG)
+local constants = ReplicatedStorage.Constants
+local CONFIG = require(constants.CONFIG)
+local Actions = require(constants.Actions)
 
 local Llama = require(ReplicatedStorage.Packages.Llama)
-
-local modules = ReplicatedStorage.Modules
-local Actions = require(modules.Actions)
 
 local utilities = ReplicatedStorage.Utilities
 local Cards = require(utilities.Cards)
@@ -38,6 +37,7 @@ local function activeMatchesReducer(state, action)
 				pad = pad,
 				pounced = false,
 				stack = stack,
+				quit = false
 			}
 
 			players[tostring(player.UserId)] = playerData

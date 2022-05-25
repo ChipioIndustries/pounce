@@ -2,8 +2,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Llama = require(ReplicatedStorage.Packages.Llama)
 
-local modules = ReplicatedStorage.Modules
-local Actions = require(modules.Actions)
+local Actions = require(ReplicatedStorage.Constants.Actions)
 
 local function stackReducer(state, action)
 	if action.type == Actions.removeCardFromStack then

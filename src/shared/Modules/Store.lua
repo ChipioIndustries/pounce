@@ -1,12 +1,10 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local packages = ReplicatedStorage.Packages
-
 local ReplicationMiddleware = require(packages.ReplicationMiddleware)
 local Rodux = require(packages.Rodux)
 
-local modules = ReplicatedStorage.Modules
-local Reducer = require(modules.Reducer)
+local Reducer = require(ReplicatedStorage.Modules.Reducer)
 
 local replicationMiddleware = ReplicationMiddleware.new()
 

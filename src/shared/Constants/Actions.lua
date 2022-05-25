@@ -25,7 +25,11 @@ local Actions = {
 	removeCardFromStack = "removeCardFromStack";
 
 	addCardsToColumn = "addCardsToColumn";
-	removeCardsFromColumn = "removeCardsfromColumn";
+	removeCardsFromColumn = "removeCardsFromColumn";
+
+	moveCardsBetweenColumns = "moveCardsBetweenColumns";
+	moveCardToColumn = "moveCardToColumn";
+	moveCardToPile = "moveCardToPile";
 }
 
 return Actions
