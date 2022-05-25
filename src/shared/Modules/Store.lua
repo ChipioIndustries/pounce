@@ -5,9 +5,13 @@ local packages = ReplicatedStorage.Packages
 local ReplicationMiddleware = require(packages.ReplicationMiddleware)
 local Rodux = require(packages.Rodux)
 
+local modules = ReplicatedStorage.Modules
+local Reducer = require(modules.Reducer)
+
 local replicationMiddleware = ReplicationMiddleware.new()
 
-local store = Rodux.Store.new(function(state, action) return state end, nil, {
+local store = Rodux.Store.new(Reducer, {}, {
+	Rodux.thunkMiddleware;
     replicationMiddleware;
 	Rodux.loggerMiddleware;
 })

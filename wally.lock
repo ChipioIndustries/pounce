@@ -4,13 +4,13 @@ registry = "test"
 
 [[package]]
 name = "chipioindustries/llama"
-version = "1.2.1"
+version = "1.2.2"
 dependencies = []
 
 [[package]]
 name = "chipioindustries/pounce"
 version = "0.1.0"
-dependencies = [["Llama", "chipioindustries/llama@1.2.1"], ["ReplicationMiddleware", "chipioindustries/replication-middleware@1.0.0"], ["Roact", "roblox/roact@1.4.2"], ["RoactRodux", "roblox/roact-rodux@0.3.0"], ["Rodux", "chipioindustries/rodux@3.0.4"]]
+dependencies = [["Llama", "chipioindustries/llama@1.2.2"], ["ReplicationMiddleware", "chipioindustries/replication-middleware@1.0.0"], ["Roact", "roblox/roact@1.4.2"], ["RoactRodux", "roblox/roact-rodux@0.3.0"], ["Rodux", "chipioindustries/rodux@3.0.4"]]
 
 [[package]]
 name = "chipioindustries/rapscallion"

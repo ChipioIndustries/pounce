@@ -2,11 +2,12 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Actions = require(ReplicatedStorage.Modules.Actions)
 
-local function addMatch(players)
+local function changeMatch(players, subAction)
 	return {
-		type = Actions.addMatch;
+		type = Actions.changeMatch;
 		players = players;
+		subAction = subAction;
 	}
 end
 
-return addMatch
+return changeMatch

@@ -13,10 +13,10 @@ local Store = require(ReplicatedStorage.Modules.Store)
 
 local appHandle = Roact.mount(
 	Roact.createElement(RoactRodux.StoreProvider, {
-		store = Store;
+		store = Store,
 	}, {
 		Roact.createElement("ScreenGui", {
-			ResetOnSpawn = false;
+			ResetOnSpawn = false,
 		})
 	}),
 	playerGui

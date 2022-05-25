@@ -10,7 +10,7 @@ Roact = "roblox/roact@1.4.2"
 Rodux = "chipioindustries/rodux@3.0.4"
 ReplicationMiddleware = "chipioindustries/replication-middleware@1.0.0"
 RoactRodux = "roblox/roact-rodux@0.3.0"
-Llama = "chipioindustries/llama@1.1.2"
+Llama = "chipioindustries/llama@1.2.2"
 
 [dev-dependencies]
 TestEZ = "roblox/testez@0.4.1"
