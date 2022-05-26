@@ -30,6 +30,7 @@ local CONFIG = {
 		[12] = "Q";
 		[13] = "K";
 	};
+	CameraPosition = CFrame.new(4, 8, 0, 0, -0.87, 0.5, 0, 0.5, 0.87, -1, 0, 0);
 	DeckSize = 52;
 	PadCount = 4;
 	StackSize = 13;
