@@ -1,16 +1,15 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Roact = require(ReplicatedStorage.Packages.Roact)
-local QuitButton = require(ReplicatedStorage.Components.QuitButton)
+
+local Table = require(ReplicatedStorage.Components.Table)
 
 local App = Roact.Component:extend("App")
 
 function App:render()
-	return Roact.createElement("ScreenGui", {
-		ResetOnSpawn = false;
-		ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-	}, {
-		Quit = Roact.createElement(QuitButton)
+	return Roact.createFragment({
+		Table = Roact.createElement(Table),
+		HUD = Roact.createElement("ScreenGui")
 	})
 end
 

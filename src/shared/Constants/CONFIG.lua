@@ -9,12 +9,6 @@ local CONFIG = {
 			"D";
 		};
 	};
-	CardSuits = {
-		"A";
-		"B";
-		"C";
-		"D";
-	};
 	CardDecorators = {
 		[1] = "1";
 		[2] = "2";
@@ -30,15 +24,30 @@ local CONFIG = {
 		[12] = "Q";
 		[13] = "K";
 	};
-	CameraPosition = CFrame.new(4, 8, 0, 0, -0.87, 0.5, 0, 0.5, 0.87, -1, 0, 0);
+	CardSuits = {
+		"A";
+		"B";
+		"C";
+		"D";
+	};
+	CameraPosition = CFrame.new(5, 8, 0, 0, -0.87, 0.5, 0, 0.5, 0.87, -1, 0, 0);
 	DeckSize = 52;
+	DeckViewableCardsCount = 3;
+	Images = {
+		Logo = "rbxassetid://9352329372"
+	};
+	Interface = {
+		BackgroundTransparency = 0.5;
+		TextFont = Enum.Font.FredokaOne;
+		Title = "pounce!";
+	};
 	PadCount = 4;
 	StackSize = 13;
-	DeckViewableCardsCount = 3;
-	MinimumPileDistance = 0.1;
 	MatchIntermission = 10;
-	MinPlayers = 1;
 	MaxPlayers = 4;
+	MinPlayers = 1;
+	-- based on card length = 80 and field size = 600
+	MinimumPileDistance = 0.14;
 	Responses = {
 		GameAlreadyEnded = "Someone has already pounced!";
 		InvalidOrigin = "Invalid origin, stop exploiting :eyes:";
@@ -52,6 +61,11 @@ local CONFIG = {
 		WrongValue = "This card is too high or low to go here!";
 		WrongSuit = "This card's suit doesn't match!";
 	};
+	Statuses = {
+		GameOver = "Game over, %s won!";
+		Waiting = "Waiting for a match...";
+	};
+	TableTag = "Table";
 }
 
 return CONFIG

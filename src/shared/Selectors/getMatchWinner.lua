@@ -2,15 +2,15 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Store = require(ReplicatedStorage.Modules.Store)
 
-local function getIsMatchFinished(matchId, _matchOverride)
+local function getMatchWinner(matchId, _matchOverride)
 	local match = _matchOverride or Store:getState().activeMatches[matchId]
-	for _playerId, player in pairs(match.players) do
+	for playerId, player in pairs(match.players) do
 		if player.pounced then
-			return true
+			return playerId
 		end
 	end
 
 	return false
 end
 
-return getIsMatchFinished
+return getMatchWinner
