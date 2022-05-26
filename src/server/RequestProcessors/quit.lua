@@ -3,12 +3,12 @@ local ServerScriptService = game:GetService("ServerScriptService")
 
 local setPlayerQuit = require(ServerScriptService.Actions.setPlayerQuit)
 
-local quitCheck = require(ReplicatedStorage.RequestChecks.quit)
+local check = require(ReplicatedStorage.Checks.Requests.quit)
 local Selectors = require(ReplicatedStorage.Selectors)
 local Store = require(ReplicatedStorage.Modules.Store)
 
 local function quit(player)
-	local valid, result = quitCheck(player)
+	local valid, result = check(player)
 
 	if valid then
 		local playerId = tostring(player.UserId)

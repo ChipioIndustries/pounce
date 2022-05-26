@@ -1,12 +1,9 @@
-local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local Selectors = require(ReplicatedStorage.Selectors)
 
-local function quit(player)
-	player = player or Players.LocalPlayer
-
+local function playerInMatch(player)
 	local playerId = tostring(player.UserId)
 	local matchId = Selectors.getMatchIdByPlayerId(playerId)
 
@@ -17,4 +14,4 @@ local function quit(player)
 	return false, CONFIG.Responses.NotInMatch
 end
 
-return quit
+return playerInMatch

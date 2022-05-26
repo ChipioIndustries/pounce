@@ -8,7 +8,7 @@ local function pythagoreanTheorem(a, b)
 	return math.sqrt(a^2 + b^2)
 end
 
-local function checkPilePosition(matchId, position, _fieldOverride)
+local function isPilePositionOk(matchId, position, _fieldOverride)
 	local piles = _fieldOverride or Store:getState().activeMatches[matchId].field
 
 	local x = position.X.Scale
@@ -25,11 +25,11 @@ local function checkPilePosition(matchId, position, _fieldOverride)
 		local c = pythagoreanTheorem(a, b)
 
 		if c < CONFIG.MinimumPileDistance then
-			return false
+			return false, CONFIG.Responses.PilesTooClose
 		end
 	end
 
 	return true
 end
 
-return checkPilePosition
+return isPilePositionOk

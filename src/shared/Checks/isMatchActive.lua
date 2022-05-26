@@ -1,19 +1,19 @@
-local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Selectors = require(ReplicatedStorage.Selectors)
 local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
+local Selectors = require(ReplicatedStorage.Selectors)
 local Store = require(ReplicatedStorage.Modules.Store)
+local check = require(ReplicatedStorage.Checks.playerInMatch)
 
-local function pounce(player)
-	player = player or Players.LocalPlayer
+local function isMatchActive(player)
+	local success, result = check(player)
+
+	if not success then
+		return success, result
+	end
 
 	local playerId = tostring(player.UserId)
 	local matchId = Selectors.getMatchIdByPlayerId(playerId)
-
-	if not matchId then
-		return false, CONFIG.Responses.NotInMatch
-	end
 
 	local players = Store:getState().activeMatches[matchId].players
 
@@ -26,4 +26,4 @@ local function pounce(player)
 	return true
 end
 
-return pounce
+return isMatchActive

@@ -36,8 +36,17 @@ local CONFIG = {
 	DeckViewableCardsCount = 3;
 	MinimumPileDistance = 0.1;
 	Responses = {
-		NotInMatch = "Player is not currently in a match";
 		GameAlreadyEnded = "Someone has already pounced!";
+		InvalidOrigin = "Invalid origin, stop exploiting :eyes:";
+		NoCard = "No card to move!";
+		NotInMatch = "You're not currently in a match!";
+		PileStartRequiresAce = "You need an ace to create a new pile!";
+		PilesTooClose = "Too close to another pile!";
+		SameColor = "These cards are the same color!";
+		StackNotCleared = "Your stack isn't empty yet!";
+		TooManyCards = "Column doesn't have enough cards to move";
+		WrongValue = "This card is too high or low to go here!";
+		WrongSuit = "This card's suit doesn't match!";
 	};
 }
 
