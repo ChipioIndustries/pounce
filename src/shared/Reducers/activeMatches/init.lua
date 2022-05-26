@@ -18,8 +18,8 @@ local function activeMatchesReducer(state, action)
 	if action.type == Actions.addMatch then
 		local players = {}
 
-		for _, player in ipairs(action.players) do
-			local deck = Cards.shuffle()
+		for _, playerId in ipairs(action.playerIds) do
+			local deck = Cards:shuffle()
 
 			local stack = {}
 			for _ = 1, CONFIG.StackSize do
@@ -42,7 +42,7 @@ local function activeMatchesReducer(state, action)
 				quit = false
 			}
 
-			players[tostring(player.UserId)] = playerData
+			players[playerId] = playerData
 		end
 
 		return Llama.Dictionary.join(state, {

@@ -1,3 +1,7 @@
 local ServerScriptService = game:GetService("ServerScriptService")
 
-require(ServerScriptService.RequestProcessor)
+local modules = ServerScriptService.Modules
+
+require(modules.RequestProcessor)
+require(modules.MatchCleanup)
+require(modules.Matchmaker)
