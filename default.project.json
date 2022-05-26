@@ -3,6 +3,13 @@
 	"tree": {
 		"$className": "DataModel",
 
+		"Players": {
+			"$className": "Players",
+			"$properties": {
+				"CharacterAutoLoads":false
+			}
+		},
+
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
 			"$path": "src/shared",
