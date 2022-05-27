@@ -30,6 +30,8 @@ local Actions = {
 	moveCardsBetweenColumns = "moveCardsBetweenColumns";
 	moveCardToColumn = "moveCardToColumn";
 	moveCardToPile = "moveCardToPile";
+
+	setSelectedCard = "setSelectedCard";
 }
 
 return Actions

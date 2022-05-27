@@ -10,7 +10,7 @@ local CONFIG = {
 		};
 	};
 	CardDecorators = {
-		[1] = "1";
+		[1] = "A";
 		[2] = "2";
 		[3] = "3";
 		[4] = "4";
@@ -34,10 +34,17 @@ local CONFIG = {
 	DeckSize = 52;
 	DeckViewableCardsCount = 3;
 	Images = {
-		Logo = "rbxassetid://9352329372"
+		Logo = "rbxassetid://9352329372";
+		Suits = {
+			["A"] = "rbxassetid://9734714805";
+			["B"] = "rbxassetid://9734715544";
+			["C"] = "rbxassetid://9734716255";
+			["D"] = "rbxassetid://9734717007";
+		};
 	};
 	Interface = {
 		BackgroundTransparency = 0.5;
+		CardSize = UDim2.new(0, 60, 0, 80);
 		TextFont = Enum.Font.FredokaOne;
 		Title = "pounce!";
 	};

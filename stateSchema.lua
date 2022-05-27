@@ -32,10 +32,13 @@ local state = {
 			},
 			field = {
 				["GUID"] = {
-					["A1"] = "id1",
-					["A2"] = "id2",
-					["A3"] = "id3",
-					["A4"] = "id4",
+					cards = {
+						["A1"] = "id1",
+						["A2"] = "id2",
+						["A3"] = "id3",
+						["A4"] = "id4",
+					},
+					position = UDim2.new(),
 				}
 			}
 		}

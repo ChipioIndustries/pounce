@@ -7,7 +7,9 @@ local packages = ReplicatedStorage.Packages
 local Maid = require(packages.Maid)
 local Roact = require(packages.Roact)
 
-local TableBackground = require(ReplicatedStorage.Components.TableBackground)
+local components = ReplicatedStorage.Components
+local TableBackground = require(components.TableBackground)
+local Field = require(components.Field)
 
 local Table = Roact.Component:extend("Table")
 
@@ -36,7 +38,8 @@ function Table:render()
 		SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud;
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
 	}, {
-		Background = Roact.createElement(TableBackground)
+		Background = Roact.createElement(TableBackground);
+		Field = Roact.createElement(Field);
 	})
 end
 
