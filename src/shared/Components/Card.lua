@@ -67,9 +67,7 @@ function Card:render()
 		),
 		Llama.Dictionary.join(
 			{
-				Corner = Roact.createElement("UICorner", {
-					CornerRadius = UDim.new(0, 8);
-				});
+				Corner = Roact.createElement("UICorner");
 				Stroke = Roact.createElement("UIStroke");
 			},
 			additionalChildren

@@ -10,6 +10,7 @@ local Roact = require(packages.Roact)
 local components = ReplicatedStorage.Components
 local TableBackground = require(components.TableBackground)
 local Field = require(components.Field)
+local Quit = require(components.Quit)
 
 local Table = Roact.Component:extend("Table")
 
@@ -40,6 +41,7 @@ function Table:render()
 	}, {
 		Background = Roact.createElement(TableBackground);
 		Field = Roact.createElement(Field);
+		Quit = Roact.createElement(Quit);
 	})
 end
 
