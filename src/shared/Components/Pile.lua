@@ -8,7 +8,7 @@ local Roact = require(ReplicatedStorage.Packages.Roact)
 
 local Card = require(ReplicatedStorage.Components.Card)
 
-local utilities = require(ReplicatedStorage.Utilities)
+local utilities = ReplicatedStorage.Utilities
 local Cards = require(utilities.Cards)
 local getSeedFromString = require(utilities.getSeedFromString)
 

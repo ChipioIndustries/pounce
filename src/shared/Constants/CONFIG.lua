@@ -44,6 +44,11 @@ local CONFIG = {
 	};
 	Interface = {
 		BackgroundTransparency = 0.5;
+		CardBackColor = Color3.fromRGB(126, 66, 59);
+		CardColors = {
+			["black"] = Color3.new(0, 0, 0);
+			["red"] = Color3.new(1, 0.2, 0.2);
+		};
 		CardSize = UDim2.new(0, 60, 0, 80);
 		TextFont = Enum.Font.FredokaOne;
 		Title = "pounce!";

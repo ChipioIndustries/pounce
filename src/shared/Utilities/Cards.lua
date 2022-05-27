@@ -8,8 +8,9 @@ local Cards = {}
 
 function Cards:getColor(signature, _colorsOverride)
 	local colors = _colorsOverride or CONFIG.CardColors
+	local suit = self:getSuit(signature)
 	for color, letters in pairs(colors) do
-		if table.find(letters, signature:sub(1, 1)) then
+		if table.find(letters, suit) then
 			return color
 		end
 	end
