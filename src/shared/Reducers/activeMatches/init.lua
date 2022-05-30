@@ -1,4 +1,3 @@
-local HttpService = game:GetService("HttpService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local constants = ReplicatedStorage.Constants
@@ -46,7 +45,7 @@ local function activeMatchesReducer(state, action)
 		end
 
 		return Llama.Dictionary.join(state, {
-			[HttpService:GenerateGUID(false)] = {
+			[action.matchId] = {
 				players = players,
 				field = {}
 			}

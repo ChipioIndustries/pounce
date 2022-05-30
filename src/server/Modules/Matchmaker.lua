@@ -1,3 +1,4 @@
+local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
@@ -11,7 +12,7 @@ local function makeMatches()
 	local nextMatch = {}
 
 	local function makeMatch()
-		Store:dispatch(addMatch(nextMatch))
+		Store:dispatch(addMatch(HttpService:GenerateGUID(false), nextMatch))
 		nextMatch = {}
 	end
 
