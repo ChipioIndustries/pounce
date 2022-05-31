@@ -24,7 +24,7 @@ jobs:
           token: ${{ SECRETS.GITHUB_TOKEN }}
     - name: Install Packages
       shell: bash
-      run: wally install
+      run: ./wally.exe install
     - name: Download OpenVPN
       run: choco install openvpn
     - name: Build Test Place
