@@ -25,10 +25,10 @@ jobs:
     - name: Install Packages
       shell: bash
       run: ./wally.exe install
+    - name: Build Test Place
+      run: rojo build default.project.json -o test.rbxl
     - name: Download OpenVPN
       run: choco install openvpn
-    - name: Build Test Place
-      run: rojo build test/test.project.json -o test.rbxl
     - name: Run OpenVPN
       run: Start-Process -FilePath "C:\\Program Files\\OpenVPN\\bin\\openvpn.exe" -ArgumentList "--config $((Resolve-Path .\\client.ovpn).Path)"
     - name: Poll for IP Change
