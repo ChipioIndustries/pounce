@@ -7,6 +7,7 @@ local Enums = require(constants.Enums)
 local packages = ReplicatedStorage.Packages
 local Llama = require(packages.Llama)
 local Roact = require(packages.Roact)
+local RoactRodux = require(packages.RoactRodux)
 
 local components = ReplicatedStorage.Components
 local Column = require(components.Column)
@@ -41,12 +42,14 @@ function Inventory:render()
 	local props = self.props
 	local rotationIndex = props.rotationIndex
 	local playerData = props.playerData
+	local selection = props.selection or {}
 
 	local cardPiles = {}
 
 	table.insert(cardPiles, Roact.createElement(Stack, {
 		cards = playerData.stack;
 		direction = Enums.CardDirection.Up;
+		selected = selection.origin == Enums.CardOrigin.Stack;
 	}))
 
 	for index, column in ipairs(playerData.pad) do
@@ -102,5 +105,13 @@ function Inventory:render()
 		)
 	)
 end
+
+Inventory = RoactRodux.connect(
+	function(state, props)
+		return {
+			selection = state.selection;
+		}
+	end
+)(Inventory)
 
 return Inventory

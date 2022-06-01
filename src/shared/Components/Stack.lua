@@ -12,6 +12,7 @@ function Stack:render()
 	local props = self.props
 	local cards = props.cards
 	local direction = props.direction
+	local selected = props.selected
 
 	local topCard = cards[#cards]
 	local bottomCard = cards[#cards - 1]
@@ -30,6 +31,7 @@ function Stack:render()
 	if topCard then
 		table.insert(cardObjects, Roact.createElement(Card, {
 			direction = direction;
+			selected = selected;
 			signature = topCard;
 			zIndex = 2;
 		}))

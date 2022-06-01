@@ -20,6 +20,7 @@ function Card:render()
 	local direction = props.direction
 	local position = props.position
 	local rotation = props.rotation
+	local selected = props.selected
 	local signature = props.signature
 	local zIndex = props.zIndex
 
@@ -53,6 +54,11 @@ function Card:render()
 		additionalChildren = {}
 	end
 
+	local strokeColor = Color3.new(0, 0, 0)
+	if selected then
+		strokeColor = Color3.new(1, 0.9, 0)
+	end
+
 	return Roact.createElement("Frame",
 		Llama.Dictionary.join(
 			{
@@ -67,7 +73,9 @@ function Card:render()
 		Llama.Dictionary.join(
 			{
 				Corner = Roact.createElement("UICorner");
-				Stroke = Roact.createElement("UIStroke");
+				Stroke = Roact.createElement("UIStroke", {
+					Color = strokeColor;
+				});
 			},
 			additionalChildren
 		)
