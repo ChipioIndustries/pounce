@@ -53,11 +53,21 @@ function Inventory:render()
 	}))
 
 	for index, column in ipairs(playerData.pad) do
+		local selectionIndex
+		if
+			selection
+			and selection.origin == Enums.CardOrigin.Column
+			and selection.column == index
+		then
+			selectionIndex = selection.index
+		end
 		table.insert(cardPiles, Roact.createElement(Column, {
 			cards = column;
+			selectionIndex = selectionIndex;
 		}))
 	end
 
+	-- padding between pad and deck
 	table.insert(cardPiles, Roact.createElement("Frame", {
 		BackgroundTransparency = 1;
 		Size = UDim2.new(0, 20, 0, 0);
@@ -78,9 +88,16 @@ function Inventory:render()
 		)
 	end
 
+	local selectionIndex
+	if selection and selection.origin == Enums.CardOrigin.Deck then
+		-- select the top card of the deck
+		selectionIndex = #cards
+	end
+
 	table.insert(cardPiles, Roact.createElement(Column, {
 		cards = cards;
 		layoutDirection = Enums.CardLayoutDirection.Horizontal;
+		selectionIndex = selectionIndex;
 	}))
 
 	local rotationProps = rotations[rotationIndex]

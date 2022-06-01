@@ -14,6 +14,7 @@ function Column:render()
 	local props = self.props
 	local cards = props.cards
 	local layoutDirection = props.layoutDirection or Enums.CardLayoutDirection.Vertical
+	local selectionIndex = props.selectionIndex
 	local cardOffset = CONFIG.Interface.CardColumnOffset[layoutDirection]
 
 	local function getOffset(index)
@@ -32,6 +33,7 @@ function Column:render()
 		table.insert(cardObjects, Roact.createElement(Card, {
 			direction = Enums.CardDirection.Up;
 			position = getOffset(index - 1);
+			selected = selectionIndex and index > selectionIndex;
 			signature = signature;
 			zIndex = index;
 		}))
