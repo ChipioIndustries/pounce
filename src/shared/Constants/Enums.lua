@@ -8,6 +8,10 @@ local Enums = {
 		Up = "Up";
 		Down = "Down";
 	};
+	CardLayoutDirection = {
+		Horizontal = "Horizontal";
+		Vertical = "Vertical";
+	};
 }
 
 return Enums

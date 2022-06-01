@@ -1,5 +1,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
+local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
+
 local Roact = require(ReplicatedStorage.Packages.Roact)
 
 local components = ReplicatedStorage.Components
@@ -16,17 +18,17 @@ function Signature:render()
 	local signature = props.signature
 
 	return Roact.createElement("Frame", {
-		BackgroundTransparency = 1;
 		AnchorPoint = anchorPoint;
+		BackgroundTransparency = 1;
 		Position = position;
 		Rotation = rotation;
-		Size = UDim2.new(0, 18, 0, 36);
+		Size = CONFIG.Interface.Signature.Size;
 	}, {
 		Decorator = Roact.createElement(Decorator, {
-			position = UDim2.new(0, 0, 0.5, 0);
-			signature = 0;
+			signature = signature;
 		});
 		Icon = Roact.createElement(Icon, {
+			position = UDim2.new(0.5, 0, 0.75, 0);
 			signature = signature;
 		})
 	})

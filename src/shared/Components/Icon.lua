@@ -9,10 +9,10 @@ local Icon = Roact.Component:extend("Icon")
 
 function Icon:render()
 	local props = self.props
-	local anchorPoint = props.anchorPoint
+	local anchorPoint = props.anchorPoint or Vector2.new(0.5, 0.5)
 	local position = props.position
 	local signature = props.signature
-	local size = props.size or UDim2.new(0, 18, 0, 18)
+	local size = props.size or CONFIG.Interface.Signature.IconSize
 
 	local suit = Cards:getSuit(signature)
 	local colorName = Cards:getColor(signature)

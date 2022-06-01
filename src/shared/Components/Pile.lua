@@ -44,13 +44,13 @@ function Pile:render()
 		})
 	end
 
-	local cardHeight = CONFIG.Interface.CardSize.Y.Scale
+	local cardHeight = CONFIG.Interface.CardSize.Y.Offset
 
 	return Roact.createElement("Frame", {
 		AnchorPoint = Vector2.new(0.5, 0.5);
 		BackgroundTransparency = 1;
 		Position = position;
-		Size = UDim2.new(cardHeight, 10, cardHeight, 10);
+		Size = UDim2.new(0, cardHeight + 10, 0, cardHeight + 10);
 		ZIndex = 2;
 	}, cardObjects)
 end

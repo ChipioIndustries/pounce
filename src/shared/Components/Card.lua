@@ -38,10 +38,9 @@ function Card:render()
 				signature = signature;
 			});
 			CenterIcon = Roact.createElement(Icon, {
-				anchorPoint = Vector2.new(0.5, 0.5);
 				signature = signature;
 				position = UDim2.new(0.5, 0, 0.5, 0);
-				size = UDim2.new(0, 36, 0, 36);
+				size = CONFIG.Interface.Signature.CenterIconSize;
 			});
 			TopSignature = Roact.createElement(Signature, {
 				signature = signature;
@@ -54,7 +53,7 @@ function Card:render()
 		additionalChildren = {}
 	end
 
-	return Roact.createElement("TextButton",
+	return Roact.createElement("Frame",
 		Llama.Dictionary.join(
 			{
 				AnchorPoint = anchorPoint;

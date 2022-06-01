@@ -33,7 +33,7 @@ local function activeMatchesReducer(state, action)
 			end
 
 			local playerData = {
-				deckPosition = 0,
+				deckPosition = 3,
 				deck = deck,
 				pad = pad,
 				pounced = false,

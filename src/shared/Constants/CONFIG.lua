@@ -50,12 +50,22 @@ local CONFIG = {
 			["red"] = Color3.new(1, 0.2, 0.2);
 		};
 		CardSize = UDim2.new(0, 60, 0, 80);
+		CardColumnOffset = {
+			Horizontal = 12;
+			Vertical = 12;
+		};
+		StackBottomCardOffset = UDim2.new(0, 0, 0, 4);
+		Signature = {
+			CenterIconSize = UDim2.new(0, 24, 0, 24);
+			IconSize = UDim2.new(0, 12, 0, 12);
+			Size = UDim2.new(0, 18, 0, 36);
+		};
 		TextFont = Enum.Font.FredokaOne;
 		Title = "pounce!";
 	};
 	PadCount = 4;
 	StackSize = 13;
-	MatchIntermission = 5;
+	MatchIntermission = 2;
 	MaxPlayers = 4;
 	MinPlayers = 1;
 	-- based on card length = 80 and field size = 600
