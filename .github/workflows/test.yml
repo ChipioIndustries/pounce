@@ -51,11 +51,6 @@ jobs:
           $elapsed += 5
         }
         Write-Output "Success!"
-    - name: Screenshot
-      if: failure()
-      uses: OrbitalOwen/desktop-screenshot-action@0.1
-      with:
-        file-name: 'desktop.jpg'
     - name: Validate Cookie
       run: |
         $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
@@ -72,8 +67,13 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
     - name: Run tests
       shell: bash
-      run: run-in-roblox --place test.rbxl --script TestExecution.server.lua > test-out.txt
+      run: run-in-roblox --place test.rbxl --script TestExecution.lua > test-out.txt
       continue-on-error: true
+    - name: Screenshot
+      if: failure()
+      uses: OrbitalOwen/desktop-screenshot-action@0.1
+      with:
+        file-name: 'desktop.jpg'
     - name: Print test results
       shell: bash
       run: cat test-out.txt
