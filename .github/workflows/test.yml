@@ -51,6 +51,11 @@ jobs:
           $elapsed += 5
         }
         Write-Output "Success!"
+    - name: Screenshot
+      if: failure()
+      uses: OrbitalOwen/desktop-screenshot-action@0.1
+      with:
+        file-name: 'desktop.jpg'
     - name: Validate Cookie
       run: |
         $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
