@@ -28,7 +28,7 @@ function Signature:render()
 			signature = signature;
 		});
 		Icon = Roact.createElement(Icon, {
-			position = UDim2.new(0.5, 0, 0.75, 0);
+			position = UDim2.new(1, -CONFIG.Interface.Signature.DecoratorSize.X.Offset / 2, 0.5, 0);
 			signature = signature;
 		})
 	})

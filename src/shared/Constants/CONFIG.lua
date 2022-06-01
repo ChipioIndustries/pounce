@@ -38,8 +38,8 @@ local CONFIG = {
 		Suits = {
 			["A"] = "rbxassetid://9734714805";
 			["B"] = "rbxassetid://9734715544";
-			["C"] = "rbxassetid://9734716255";
-			["D"] = "rbxassetid://9734717007";
+			["C"] = "rbxassetid://9734717007";
+			["D"] = "rbxassetid://9734716255";
 		};
 	};
 	Interface = {
@@ -57,8 +57,9 @@ local CONFIG = {
 		StackBottomCardOffset = UDim2.new(0, 0, 0, 4);
 		Signature = {
 			CenterIconSize = UDim2.new(0, 24, 0, 24);
+			DecoratorSize = UDim2.new(0, 18, 0, 18);
 			IconSize = UDim2.new(0, 12, 0, 12);
-			Size = UDim2.new(0, 18, 0, 36);
+			Size = UDim2.new(1, 0, 0, 18);
 		};
 		TextFont = Enum.Font.FredokaOne;
 		Title = "pounce!";

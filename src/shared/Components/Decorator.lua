@@ -24,7 +24,7 @@ function Decorator:render()
 		BackgroundTransparency = 1;
 		Font = CONFIG.Interface.TextFont;
 		Position = position;
-		Size = UDim2.new(0, 18, 0, 18);
+		Size = CONFIG.Interface.Signature.DecoratorSize;
 		Text = decorator:upper();
 		TextColor3 = color;
 		TextScaled = true;
