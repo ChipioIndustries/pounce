@@ -47,7 +47,7 @@ function StatusBar:render()
 end
 
 StatusBar = RoactRodux.connect(
-	function(state, props)
+	function(_state, _props)
 		return {
 			match = Selectors.getMatchByPlayerId()
 		}

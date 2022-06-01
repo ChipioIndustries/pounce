@@ -124,7 +124,7 @@ function Inventory:render()
 end
 
 Inventory = RoactRodux.connect(
-	function(state, props)
+	function(state, _props)
 		return {
 			selection = state.selection;
 		}

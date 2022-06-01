@@ -1,9 +1,4 @@
-local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
-local player = Players.LocalPlayer
-
-local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 
 local packages = ReplicatedStorage.Packages
 local Roact = require(packages.Roact)
@@ -39,7 +34,7 @@ function Field:render()
 end
 
 Field = RoactRodux.connect(
-	function(state, props)
+	function(_state, _props)
 		local match = Selectors.getMatchByPlayerId()
 		local piles = match and match.field
 		return {

@@ -13,10 +13,10 @@ local isCardDescendingAndAlternating = require(checks.isCardDescendingAndAlterna
 local function moveCardsBetweenColumns(player, columnIndexA, columnIndexB, cardCount)
 	player = player or Players.LocalPlayer
 
-	local success, result = isMatchActive(player)
+	local successActive, resultActive = isMatchActive(player)
 
-	if not success then
-		return success, result
+	if not successActive then
+		return successActive, resultActive
 	end
 
 	local playerId = tostring(player.UserId)
@@ -34,10 +34,10 @@ local function moveCardsBetweenColumns(player, columnIndexA, columnIndexB, cardC
 	local originCard = originColumn[#originColumn] + 1 - cardCount
 
 	if targetCard then
-		local success, result = isCardDescendingAndAlternating(targetCard, originCard)
+		local successCardOrder, resultCardOrder = isCardDescendingAndAlternating(targetCard, originCard)
 
-		if not success then
-			return success, result
+		if not successCardOrder then
+			return successCardOrder, resultCardOrder
 		end
 	end
 

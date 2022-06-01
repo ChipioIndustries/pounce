@@ -43,7 +43,7 @@ function Quit:render()
 end
 
 Quit = RoactRodux.connect(
-	function(state, props)
+	function(_state, _props)
 		local match = Selectors.getMatchByPlayerId();
 		local quit = if match then match.players[tostring(player.UserId)].quit else false
 		return {

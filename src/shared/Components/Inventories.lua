@@ -31,7 +31,7 @@ function Inventories:render()
 end
 
 Inventories = RoactRodux.connect(
-	function(state, props)
+	function(_state, _props)
 		return {
 			matchData = Selectors.getMatchByPlayerId();
 		}
