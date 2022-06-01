@@ -15,7 +15,7 @@ dependencies = []
 [[package]]
 name = "chipioindustries/pounce"
 version = "0.1.0"
-dependencies = [["LeakyBucket", "chipioindustries/leaky-bucket@1.0.1"], ["Llama", "chipioindustries/llama@1.2.2"], ["Maid", "flamenco687/maid@3.2.2"], ["Remotes", "chipioindustries/remotes@1.0.1"], ["ReplicationMiddleware", "chipioindustries/replication-middleware@1.0.0"], ["Roact", "roblox/roact@1.4.2"], ["RoactRodux", "chipioindustries/roact-rodux@1.0.3"], ["Rodux", "chipioindustries/rodux@3.0.4"]]
+dependencies = [["LeakyBucket", "chipioindustries/leaky-bucket@1.0.1"], ["Llama", "chipioindustries/llama@1.2.2"], ["Maid", "flamenco687/maid@3.2.2"], ["Remotes", "chipioindustries/remotes@1.0.1"], ["ReplicationMiddleware", "chipioindustries/replication-middleware@1.0.0"], ["Roact", "roblox/roact@1.4.2"], ["RoactRodux", "chipioindustries/roact-rodux@1.0.4"], ["Rodux", "chipioindustries/rodux@3.0.4"]]
 
 [[package]]
 name = "chipioindustries/rapscallion"
@@ -34,7 +34,7 @@ dependencies = [["Llama", "freddylist/llama@1.1.1"], ["Remotes", "chipioindustri
 
 [[package]]
 name = "chipioindustries/roact-rodux"
-version = "1.0.3"
+version = "1.0.4"
 dependencies = [["Roact", "roblox/roact@1.4.2"], ["Rodux", "roblox/rodux@3.0.0"]]
 
 [[package]]
