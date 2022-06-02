@@ -2,11 +2,11 @@ name: Lint
 
 on:
   push:
-    paths-ignore:
-    - docs/**
+    paths:
+    - src/**
   pull_request:
-    paths-ignore:
-    - docs/**
+    paths:
+    - src/**
 
 jobs:
   lint:
