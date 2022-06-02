@@ -9,7 +9,7 @@ Documentation is a critical resource for making projects easy to maintain. Pounc
 
 * You must have [NodeJS](https://nodejs.org/) installed.
 
-## Installing packages
+## Installing Packages
 
 Navigate to the docs folder and use `npm` to install the required packages.
 
@@ -18,7 +18,7 @@ cd docs
 npm ci
 ```
 
-## Starting local server
+## Starting Local Server
 
 Run the local development server to preview your docs changes.
 
