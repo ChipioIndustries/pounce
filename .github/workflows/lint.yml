@@ -4,9 +4,15 @@ on:
   push:
     paths:
     - src/**
+    - foreman.toml
+    - selene.toml
+    - testez.toml
   pull_request:
     paths:
     - src/**
+    - foreman.toml
+    - selene.toml
+    - testez.toml
 
 jobs:
   lint:
