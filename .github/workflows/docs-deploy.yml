@@ -6,7 +6,6 @@ on:
     paths:
     - docs/**
     - .github/**
-    - yarn.lock
 
 jobs:
   deploy:
