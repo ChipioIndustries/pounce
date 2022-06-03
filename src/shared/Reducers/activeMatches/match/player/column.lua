@@ -1,7 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local constants = ReplicatedStorage.Constants
-local CONFIG = require(constants.CONFIG)
 local Actions = require(constants.Actions)
 
 local Llama = require(ReplicatedStorage.Packages.Llama)

@@ -2,7 +2,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 
 local Llama = require(ReplicatedStorage.Packages.Llama)
-local Cards = require(ReplicatedStorage.Utilities.Cards)
 
 local actions = ServerScriptService.Actions
 local addCardsToColumn = require(actions.addCardsToColumn)
