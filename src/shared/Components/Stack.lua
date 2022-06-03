@@ -12,6 +12,7 @@ function Stack:render()
 	local props = self.props
 	local cards = props.cards
 	local direction = props.direction
+	local onClick = props.onClick
 	local selected = props.selected
 
 	local topCard = cards[#cards]
@@ -31,6 +32,7 @@ function Stack:render()
 	if topCard then
 		table.insert(cardObjects, Roact.createElement(Card, {
 			direction = direction;
+			onClick = onClick;
 			selected = selected;
 			signature = topCard;
 			zIndex = 2;

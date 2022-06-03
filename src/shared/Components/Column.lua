@@ -13,7 +13,9 @@ local Column = Roact.Component:extend("Column")
 function Column:render()
 	local props = self.props
 	local cards = props.cards
+	local clickable = props.clickable or Enums.Clickable.All
 	local layoutDirection = props.layoutDirection or Enums.CardLayoutDirection.Vertical
+	local onClick = props.onClick
 	local selectionIndex = props.selectionIndex
 	local cardOffset = CONFIG.Interface.CardColumnOffset[layoutDirection]
 
@@ -30,10 +32,25 @@ function Column:render()
 	local cardObjects = {}
 
 	for index, signature in ipairs(cards) do
+		local callback
+		if onClick then
+			if clickable == Enums.Clickable.All then
+				callback = function(...)
+					local args = {...}
+					table.insert(args, index)
+					onClick(unpack(args))
+				end
+			elseif clickable == Enums.Clickable.TopOnly then
+				if index == #cards then
+					callback = onClick
+				end
+			end
+		end
 		table.insert(cardObjects, Roact.createElement(Card, {
 			direction = Enums.CardDirection.Up;
+			onClick = callback;
 			position = getOffset(index - 1);
-			selected = selectionIndex and index > selectionIndex;
+			selected = selectionIndex and index >= selectionIndex;
 			signature = signature;
 			zIndex = index;
 		}))

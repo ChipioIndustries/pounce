@@ -18,6 +18,7 @@ function Card:render()
 	local props = self.props
 	local anchorPoint = props.anchorPoint
 	local direction = props.direction
+	local onClick = props.onClick
 	local position = props.position
 	local rotation = props.rotation
 	local selected = props.selected
@@ -73,6 +74,13 @@ function Card:render()
 		Llama.Dictionary.join(
 			{
 				Corner = Roact.createElement("UICorner");
+				-- WHYYYY DONT UISTROKES WORK ON TEXTBUTTONS
+				InputCapture = Roact.createElement("TextButton", {
+					BackgroundTransparency = 1;
+					Size = UDim2.new(1, 0, 1, 0);
+					Text = "";
+					[Roact.Event.Activated] = onClick;
+				});
 				Stroke = Roact.createElement("UIStroke", {
 					Color = strokeColor;
 				});

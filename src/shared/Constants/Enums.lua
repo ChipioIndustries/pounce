@@ -12,6 +12,11 @@ local Enums = {
 		Horizontal = "Horizontal";
 		Vertical = "Vertical";
 	};
+	Clickable = {
+		All = "All";
+		None = "None";
+		TopOnly = "TopOnly";
+	};
 }
 
 return Enums

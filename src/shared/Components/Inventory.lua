@@ -13,6 +13,8 @@ local components = ReplicatedStorage.Components
 local Column = require(components.Column)
 local Stack = require(components.Stack)
 
+local makeHandleSelectionOr = require(ReplicatedStorage.Utilities.makeHandleSelectionOr)
+
 local Inventory = Roact.Component:extend("Inventory")
 
 local rotations = {
@@ -40,31 +42,58 @@ local rotations = {
 
 function Inventory:render()
 	local props = self.props
-	local rotationIndex = props.rotationIndex
+	local isLocalPlayer = props.isLocalPlayer
 	local playerData = props.playerData
-	local selection = props.selection or {}
+	local rotationIndex = props.rotationIndex
+	local selection = props.selection
 
 	local cardPiles = {}
 
-	table.insert(cardPiles, Roact.createElement(Stack, {
-		cards = playerData.stack;
-		direction = Enums.CardDirection.Up;
-		selected = selection.origin == Enums.CardOrigin.Stack;
-	}))
+	local stackInput = {}
+
+	if isLocalPlayer then
+		stackInput = {
+			selected = selection and selection.origin == Enums.CardOrigin.Stack;
+			onClick = makeHandleSelectionOr(nil, Enums.CardOrigin.Stack);
+		}
+	end
+
+	table.insert(cardPiles, Roact.createElement(Stack,
+		Llama.Dictionary.join(
+			{
+				cards = playerData.stack;
+				direction = Enums.CardDirection.Up;
+			},
+			stackInput
+		)
+	))
 
 	for index, column in ipairs(playerData.pad) do
-		local selectionIndex
-		if
-			selection
-			and selection.origin == Enums.CardOrigin.Column
-			and selection.column == index
-		then
-			selectionIndex = selection.index
+		local columnInput = {}
+		if isLocalPlayer then
+			local selectionIndex
+			if
+				selection
+				and selection.origin == Enums.CardOrigin.Column
+				and selection.column == index
+			then
+				selectionIndex = selection.index
+			end
+			columnInput = {
+				onClick = makeHandleSelectionOr(function()
+					print("col clicked")
+				end, Enums.CardOrigin.Column, index);
+				selectionIndex = selectionIndex;
+			}
 		end
-		table.insert(cardPiles, Roact.createElement(Column, {
-			cards = column;
-			selectionIndex = selectionIndex;
-		}))
+		table.insert(cardPiles, Roact.createElement(Column,
+			Llama.Dictionary.join(
+				{
+					cards = column;
+				},
+				columnInput
+			)
+		))
 	end
 
 	-- padding between pad and deck
@@ -73,10 +102,25 @@ function Inventory:render()
 		Size = UDim2.new(0, 20, 0, 0);
 	}))
 
-	table.insert(cardPiles, Roact.createElement(Stack, {
-		cards = Llama.List.slice(playerData.deck, playerData.deckPosition + 1);
-		direction = Enums.CardDirection.Down;
-	}))
+	local hiddenDeckInput = {}
+
+	if isLocalPlayer then
+		hiddenDeckInput = {
+			onClick = function()
+				-- TODO: change deck position
+			end;
+		}
+	end
+
+	table.insert(cardPiles, Roact.createElement(Stack,
+		Llama.Dictionary.join(
+			{
+				cards = Llama.List.slice(playerData.deck, playerData.deckPosition + 1);
+				direction = Enums.CardDirection.Down;
+			},
+			hiddenDeckInput
+		)
+	))
 
 	-- get the top 3 viewable cards from the deck
 	local cards = {}
@@ -88,17 +132,31 @@ function Inventory:render()
 		)
 	end
 
-	local selectionIndex
-	if selection and selection.origin == Enums.CardOrigin.Deck then
-		-- select the top card of the deck
-		selectionIndex = #cards
+	local shownDeckInput = {}
+
+	if isLocalPlayer then
+		local selectionIndex
+		if selection and selection.origin == Enums.CardOrigin.Deck then
+			-- select the top card of the deck
+			selectionIndex = #cards
+		end
+
+		shownDeckInput = {
+			clickable = Enums.Clickable.TopOnly;
+			onClick = makeHandleSelectionOr(nil, Enums.CardOrigin.Deck);
+			selectionIndex = selectionIndex;
+		}
 	end
 
-	table.insert(cardPiles, Roact.createElement(Column, {
-		cards = cards;
-		layoutDirection = Enums.CardLayoutDirection.Horizontal;
-		selectionIndex = selectionIndex;
-	}))
+	table.insert(cardPiles, Roact.createElement(Column,
+		Llama.Dictionary.join(
+			{
+				cards = cards;
+				layoutDirection = Enums.CardLayoutDirection.Horizontal;
+			},
+			shownDeckInput
+		)
+	))
 
 	local rotationProps = rotations[rotationIndex]
 

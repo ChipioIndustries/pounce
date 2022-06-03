@@ -1,4 +1,7 @@
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local player = Players.LocalPlayer
 
 local packages = ReplicatedStorage.Packages
 local Roact = require(packages.Roact)
@@ -21,6 +24,7 @@ function Inventories:render()
 		for playerId, playerData in pairs(matchData.players) do
 			index += 1
 			inventories[playerId] = Roact.createElement(Inventory, {
+				isLocalPlayer = playerId == tostring(player.UserId);
 				playerData = playerData;
 				rotationIndex = index;
 			})
