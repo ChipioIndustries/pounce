@@ -14,6 +14,8 @@ local components = ReplicatedStorage.Components
 local Column = require(components.Column)
 local Stack = require(components.Stack)
 
+local setSelectedCard = require(ReplicatedStorage.Actions.setSelectedCard)
+
 local makeHandleSelectionOr = require(ReplicatedStorage.Utilities.makeHandleSelectionOr)
 
 local advancePlayerDeckPosition = Remotes:getFunctionAsync("advancePlayerDeckPosition")
@@ -49,6 +51,7 @@ function Inventory:render()
 	local playerData = props.playerData
 	local rotationIndex = props.rotationIndex
 	local selection = props.selection
+	local wipeSelection = props.wipeSelection
 
 	local cardPiles = {}
 
@@ -117,6 +120,7 @@ function Inventory:render()
 	if isLocalPlayer then
 		hiddenDeckInput = {
 			onClick = function()
+				wipeSelection()
 				advancePlayerDeckPosition:InvokeServer()
 			end;
 		}
@@ -170,6 +174,7 @@ function Inventory:render()
 			{
 				cards = cards;
 				layoutDirection = Enums.CardLayoutDirection.Horizontal;
+				sizeOffsetsOverride = CONFIG.DeckViewableCardsCount;
 			},
 			shownDeckInput
 		)
@@ -202,6 +207,13 @@ Inventory = RoactRodux.connect(
 	function(state, _props)
 		return {
 			selection = state.selection;
+		}
+	end,
+	function(dispatch)
+		return {
+			wipeSelection = function()
+				dispatch(setSelectedCard())
+			end
 		}
 	end
 )(Inventory)
