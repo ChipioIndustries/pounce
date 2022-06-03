@@ -91,7 +91,7 @@ function Inventory:render()
 			end
 			columnInput = {
 				onClick = makeHandleSelectionOr(function()
-					print("col clicked")
+
 				end, Enums.CardOrigin.Column, index);
 				selectionIndex = selectionIndex;
 			}

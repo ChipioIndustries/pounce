@@ -8,12 +8,11 @@ local function makeHandleSelectionOr(action, origin, column)
 		local currentSelection = Store:getState().selection
 		-- if no action function, action will always be to select the card
 		if currentSelection then
+			local isSameColumn = currentSelection.origin == origin and currentSelection.column == column
 			-- if this card is already selected, deselect
-			if
-				currentSelection.origin == origin
-				and currentSelection.column == column
-				and currentSelection.index == index
-			then
+			if isSameColumn and column and currentSelection.index ~= index then
+				Store:dispatch(setSelectedCard(origin, column, index))
+			elseif isSameColumn and currentSelection.index == index then
 				Store:dispatch(setSelectedCard())
 			elseif action then
 				action(index)
