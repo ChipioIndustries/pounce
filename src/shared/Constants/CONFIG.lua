@@ -54,6 +54,7 @@ local CONFIG = {
 			Horizontal = 12;
 			Vertical = 12;
 		};
+		FieldSize = 0.6;
 		StackBottomCardOffset = UDim2.new(0, 0, 0, 4);
 		Signature = {
 			CenterIconSize = UDim2.new(0, 24, 0, 24);

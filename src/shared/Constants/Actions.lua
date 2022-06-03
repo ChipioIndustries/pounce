@@ -5,7 +5,7 @@ local Actions = {
 
 	changePlayer = "changePlayer",
 
-	addField = "addField",
+	addPile = "addPile",
 	changeField = "changeField",
 	removeField = "removeField",
 
@@ -33,5 +33,11 @@ local Actions = {
 
 	setSelectedCard = "setSelectedCard";
 }
+
+setmetatable(Actions, {
+	__index = function()
+		error("Attempt to read nonexistent action name")
+	end
+})
 
 return Actions

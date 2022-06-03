@@ -41,7 +41,7 @@ local function playerReducer(state, action)
 			deckPosition = nextDeckPosition
 		})
 	elseif action.type == Actions.setPlayerDeckPosition then
-		local position = if #state.deck < action.position then action.position else #state.deck
+		local position = if #state.deck >= action.position then action.position else #state.deck
 		return Llama.Dictionary.join(state, {
 			deckPosition = position
 		})
