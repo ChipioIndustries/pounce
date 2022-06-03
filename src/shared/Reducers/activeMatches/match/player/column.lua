@@ -13,15 +13,22 @@ local function columnReducer(state, action)
 		local newCards = {}
 		local lastValue
 		if #state == 0 then
-			lastValue = #CONFIG.CardDecorators + 1
+			lastValue = Cards:getValue(action.cards[1]) + 1
 		else
 			lastValue = Cards:getValue(state[#state])
 		end
-		for _, suit in ipairs(action.suits) do
+
+		local suits = {}
+		for _, card in ipairs(action.cards) do
+			table.insert(suits, Cards:getSuit(card))
+		end
+
+		for _, suit in ipairs(suits) do
 			lastValue -= 1
 			assert(lastValue > 0, "attempt to add too many cards")
 			table.insert(newCards, Cards:getSignature(suit, lastValue))
 		end
+
 		return Llama.List.push(state, unpack(newCards))
 	elseif action.type == Actions.removeCardsFromColumn then
 		assert(

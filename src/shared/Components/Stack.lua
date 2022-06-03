@@ -7,6 +7,7 @@ local Roact = require(ReplicatedStorage.Packages.Roact)
 local components = ReplicatedStorage.Components
 local Card = require(components.Card)
 local Empty = require(components.Empty)
+local Pounce = require(components.Pounce)
 
 local Stack = Roact.Component:extend("Stack")
 
@@ -14,6 +15,7 @@ function Stack:render()
 	local props = self.props
 	local cards = props.cards
 	local direction = props.direction
+	local isMainStack = props.isMainStack
 	local onClick = props.onClick
 	local selected = props.selected
 
@@ -40,9 +42,13 @@ function Stack:render()
 			zIndex = 2;
 		}))
 	else
-		table.insert(cardObjects, Roact.createElement(Empty, {
-			onClick = onClick;
-		}))
+		if isMainStack then
+			table.insert(cardObjects, Roact.createElement(Pounce))
+		else
+			table.insert(cardObjects, Roact.createElement(Empty, {
+				onClick = onClick;
+			}))
+		end
 	end
 
 	return Roact.createElement("Frame", {

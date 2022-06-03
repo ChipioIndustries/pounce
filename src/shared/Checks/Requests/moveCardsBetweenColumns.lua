@@ -31,7 +31,7 @@ local function moveCardsBetweenColumns(player, columnIndexA, columnIndexB, cardC
 		return false, CONFIG.Responses.TooManyCards
 	end
 
-	local originCard = originColumn[#originColumn] + 1 - cardCount
+	local originCard = originColumn[#originColumn + 1 - cardCount]
 
 	if targetCard then
 		local successCardOrder, resultCardOrder = isCardDescendingAndAlternating(targetCard, originCard)

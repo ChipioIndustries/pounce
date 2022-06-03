@@ -14,13 +14,8 @@ local function moveCardsBetweenColumns(matchId, playerId, columnIndexA, columnIn
 		local columnA = playerColumns[columnIndexA]
 		local cards = Llama.List.slice(columnA, #columnA - cardCount + 1)
 
-		local suits = {}
-		for _, card in ipairs(cards) do
-			table.insert(suits, Cards:getSuit(card))
-		end
-
 		store:dispatch(removeCardsFromColumn(matchId, playerId, columnIndexA, cardCount))
-		store:dispatch(addCardsToColumn(matchId, playerId, columnIndexB, unpack(suits)))
+		store:dispatch(addCardsToColumn(matchId, playerId, columnIndexB, unpack(cards)))
 	end
 end
 

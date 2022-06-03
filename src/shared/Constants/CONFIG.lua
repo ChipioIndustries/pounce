@@ -52,7 +52,7 @@ local CONFIG = {
 		CardSize = UDim2.new(0, 60, 0, 80);
 		CardColumnOffset = {
 			Horizontal = 12;
-			Vertical = 12;
+			Vertical = 16;
 		};
 		FieldSize = 0.6;
 		StackBottomCardOffset = UDim2.new(0, 0, 0, 4);
@@ -65,9 +65,9 @@ local CONFIG = {
 		TextFont = Enum.Font.FredokaOne;
 		Title = "pounce!";
 	};
-	PadCount = 12;
+	PadCount = 5;
 	StackSize = 13;
-	MatchIntermission = 1;
+	MatchIntermission = 10;
 	MaxPlayers = 4;
 	MinPlayers = 1;
 	-- based on card length = 80 and field size = 600

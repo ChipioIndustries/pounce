@@ -20,6 +20,7 @@ local makeHandleSelectionOr = require(ReplicatedStorage.Utilities.makeHandleSele
 
 local advancePlayerDeckPosition = Remotes:getFunctionAsync("advancePlayerDeckPosition")
 local moveCardToColumn = Remotes:getFunctionAsync("moveCardToColumn")
+local moveCardsBetweenColumns = Remotes:getFunctionAsync("moveCardsBetweenColumns")
 
 local Inventory = Roact.Component:extend("Inventory")
 
@@ -52,6 +53,7 @@ function Inventory:render()
 	local playerData = props.playerData
 	local rotationIndex = props.rotationIndex
 	local selection = props.selection
+	local setSelection = props.setSelection
 	local wipeSelection = props.wipeSelection
 
 	local cardPiles = {}
@@ -62,8 +64,13 @@ function Inventory:render()
 
 	if isLocalPlayer then
 		stackInput = {
+			isMainStack = true;
 			selected = selection and selection.origin == Enums.CardOrigin.Stack;
-			onClick = makeHandleSelectionOr(nil, Enums.CardOrigin.Stack);
+			onClick = function()
+				if #playerData.stack > 0 then
+					setSelection(Enums.CardOrigin.Stack)
+				end
+			end;
 		}
 	end
 
@@ -90,14 +97,26 @@ function Inventory:render()
 			then
 				selectionIndex = selection.index
 			end
-			columnInput = {
-				onClick = makeHandleSelectionOr(function()
+			local callback
+			local function moveToColumnHandler()
+				if selection then
 					if selection.origin == Enums.CardOrigin.Column then
-						-- TODO from column to column
+						local originColumn = selection.column
+						local cardCount = #playerData.pad[originColumn] - selection.index + 1
+						moveCardsBetweenColumns:InvokeServer(originColumn, index, cardCount)
 					else
-						print(moveCardToColumn:InvokeServer(index, selection.origin))
+						moveCardToColumn:InvokeServer(index, selection.origin)
 					end
-				end, Enums.CardOrigin.Column, index);
+					wipeSelection()
+				end
+			end
+			if #column > 0 then
+				callback = makeHandleSelectionOr(moveToColumnHandler, Enums.CardOrigin.Column, index)
+			else
+				callback = moveToColumnHandler
+			end
+			columnInput = {
+				onClick = callback;
 				selectionIndex = selectionIndex;
 			}
 		end
@@ -216,6 +235,9 @@ Inventory = RoactRodux.connect(
 	end,
 	function(dispatch)
 		return {
+			setSelection = function(...)
+				dispatch(setSelectedCard(...))
+			end;
 			wipeSelection = function()
 				dispatch(setSelectedCard())
 			end

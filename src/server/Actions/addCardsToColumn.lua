@@ -7,10 +7,10 @@ local actions = ServerScriptService.Actions
 local changePlayerColumn = require(actions.changePlayerColumn)
 
 local function addCardsToColumn(matchId, playerId, columnIndex, ...)
-	local suits = {...}
+	local cards = {...}
 	return changePlayerColumn(matchId, playerId, columnIndex, {
 		type = Actions.addCardsToColumn;
-		suits = suits;
+		cards = cards;
 	})
 end
 
