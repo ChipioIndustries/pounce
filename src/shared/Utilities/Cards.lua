@@ -2,8 +2,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 
-local RNG = Random.new()
-
 local Cards = {}
 
 function Cards:getColor(signature, _colorsOverride)
@@ -41,7 +39,10 @@ function Cards:makeDeck(_configOverride)
 	return deck
 end
 
-function Cards:shuffle(deck, _configOverride)
+function Cards:shuffle(deck, seed, _configOverride)
+	seed = seed or tick()
+	local RNG = Random.new(seed)
+
 	if not deck then
 		deck = self:makeDeck(_configOverride)
 	else

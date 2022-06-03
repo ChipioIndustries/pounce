@@ -32,8 +32,10 @@ local function playerReducer(state, action)
 		})
 	elseif action.type == Actions.advancePlayerDeckPosition then
 		local nextDeckPosition = state.deckPosition + CONFIG.DeckViewableCardsCount
-		if nextDeckPosition > #state.deck then
+		if state.deckPosition == #state.deck then
 			nextDeckPosition = 0
+		elseif nextDeckPosition > #state.deck then
+			nextDeckPosition = #state.deck
 		end
 		return Llama.Dictionary.join(state, {
 			deckPosition = nextDeckPosition

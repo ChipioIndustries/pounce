@@ -20,6 +20,9 @@ function Field:render()
 		cardPiles[id] = Roact.createElement(Pile, {
 			cards = pile.cards;
 			id = id;
+			onClick = function()
+				-- TODO: add selected card to pile
+			end;
 			position = pile.position;
 		})
 	end

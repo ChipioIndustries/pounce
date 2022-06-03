@@ -4,7 +4,9 @@ local constants = ReplicatedStorage.Constants
 local CONFIG = require(constants.CONFIG)
 local Enums = require(constants.Enums)
 
-local Roact = require(ReplicatedStorage.Packages.Roact)
+local packages = ReplicatedStorage.Packages
+local Llama = require(packages.Llama)
+local Roact = require(packages.Roact)
 
 local Card = require(ReplicatedStorage.Components.Card)
 
@@ -18,6 +20,7 @@ function Pile:render()
 	local props = self.props
 	local cards = props.cards
 	local id = props.id
+	local onClick = props.onClick
 	local position = props.position
 
 	local RNG = Random.new(getSeedFromString(id))
@@ -34,9 +37,15 @@ function Pile:render()
 			direction = Enums.CardDirection.Down
 		end
 
+		local callback
+		if index == Llama.Dictionary.count(cards) then
+			callback = onClick
+		end
+
 		cardObjects[index] = Roact.createElement(Card, {
 			anchorPoint = Vector2.new(0.5, 0.5);
 			direction = direction;
+			onClick = callback;
 			position = UDim2.new(0.5, 0, 0.5, 0);
 			rotation = RNG:NextInteger(0, 359);
 			signature = cardSignature;

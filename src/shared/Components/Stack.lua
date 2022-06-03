@@ -4,7 +4,9 @@ local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 
 local Roact = require(ReplicatedStorage.Packages.Roact)
 
-local Card = require(ReplicatedStorage.Components.Card)
+local components = ReplicatedStorage.Components
+local Card = require(components.Card)
+local Empty = require(components.Empty)
 
 local Stack = Roact.Component:extend("Stack")
 
@@ -36,6 +38,10 @@ function Stack:render()
 			selected = selected;
 			signature = topCard;
 			zIndex = 2;
+		}))
+	else
+		table.insert(cardObjects, Roact.createElement(Empty, {
+			onClick = onClick;
 		}))
 	end
 

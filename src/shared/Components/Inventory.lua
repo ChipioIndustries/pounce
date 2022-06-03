@@ -6,6 +6,7 @@ local Enums = require(constants.Enums)
 
 local packages = ReplicatedStorage.Packages
 local Llama = require(packages.Llama)
+local Remotes = require(packages.Remotes)
 local Roact = require(packages.Roact)
 local RoactRodux = require(packages.RoactRodux)
 
@@ -14,6 +15,8 @@ local Column = require(components.Column)
 local Stack = require(components.Stack)
 
 local makeHandleSelectionOr = require(ReplicatedStorage.Utilities.makeHandleSelectionOr)
+
+local advancePlayerDeckPosition = Remotes:getFunctionAsync("advancePlayerDeckPosition")
 
 local Inventory = Roact.Component:extend("Inventory")
 
@@ -49,6 +52,8 @@ function Inventory:render()
 
 	local cardPiles = {}
 
+	-- stack
+
 	local stackInput = {}
 
 	if isLocalPlayer then
@@ -67,6 +72,8 @@ function Inventory:render()
 			stackInput
 		)
 	))
+
+	-- pad (columns)
 
 	for index, column in ipairs(playerData.pad) do
 		local columnInput = {}
@@ -97,37 +104,47 @@ function Inventory:render()
 	end
 
 	-- padding between pad and deck
+
 	table.insert(cardPiles, Roact.createElement("Frame", {
 		BackgroundTransparency = 1;
 		Size = UDim2.new(0, 20, 0, 0);
 	}))
+
+	-- hidden portion of deck
 
 	local hiddenDeckInput = {}
 
 	if isLocalPlayer then
 		hiddenDeckInput = {
 			onClick = function()
-				-- TODO: change deck position
+				advancePlayerDeckPosition:InvokeServer()
 			end;
 		}
+	end
+
+	local hiddenDeckCards = {}
+	if playerData.deckPosition + 1 <= #playerData.deck then
+		hiddenDeckCards = Llama.List.slice(playerData.deck, playerData.deckPosition + 1)
 	end
 
 	table.insert(cardPiles, Roact.createElement(Stack,
 		Llama.Dictionary.join(
 			{
-				cards = Llama.List.slice(playerData.deck, playerData.deckPosition + 1);
+				cards = hiddenDeckCards;
 				direction = Enums.CardDirection.Down;
 			},
 			hiddenDeckInput
 		)
 	))
 
+	-- visible portion of deck
+
 	-- get the top 3 viewable cards from the deck
 	local cards = {}
 	if playerData.deckPosition > 0 then
 		cards = Llama.List.slice(
 			playerData.deck,
-			math.max(1, playerData.deckPosition - CONFIG.DeckViewableCardsCount),
+			math.max(1, playerData.deckPosition - CONFIG.DeckViewableCardsCount + 1),
 			playerData.deckPosition
 		)
 	end

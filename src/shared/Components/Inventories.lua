@@ -11,6 +11,8 @@ local Inventory = require(ReplicatedStorage.Components.Inventory)
 
 local Selectors = require(ReplicatedStorage.Selectors)
 
+local localPlayerId = tostring(player.UserId)
+
 local Inventories = Roact.Component:extend("Inventories")
 
 function Inventories:render()
@@ -18,16 +20,25 @@ function Inventories:render()
 	local matchData = props.matchData
 
 	local inventories = {}
-	local index = 0
+	local index = 1
 
 	if matchData then
-		for playerId, playerData in pairs(matchData.players) do
-			index += 1
+		local function addData(playerId, playerData, playerIndex)
 			inventories[playerId] = Roact.createElement(Inventory, {
 				isLocalPlayer = playerId == tostring(player.UserId);
 				playerData = playerData;
-				rotationIndex = index;
+				rotationIndex = playerIndex;
 			})
+		end
+
+		-- ensure localplayer gets 1st position
+		addData(localPlayerId, matchData.players[localPlayerId], index)
+
+		for playerId, playerData in pairs(matchData.players) do
+			if playerId ~= localPlayerId then
+				index += 1
+				addData(playerId, playerData, index)
+			end
 		end
 	end
 

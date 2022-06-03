@@ -66,7 +66,7 @@ local CONFIG = {
 	};
 	PadCount = 4;
 	StackSize = 13;
-	MatchIntermission = 2;
+	MatchIntermission = 1;
 	MaxPlayers = 4;
 	MinPlayers = 1;
 	-- based on card length = 80 and field size = 600
