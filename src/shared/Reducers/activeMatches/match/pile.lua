@@ -10,13 +10,13 @@ local Cards = require(ReplicatedStorage.Utilities.Cards)
 
 local function pileReducer(state, action)
 	if action.type == Actions.addCardToPile then
-		local keys = Llama.Dictionary.keys(state)
-		assert(CONFIG.CardDecorators[#keys + 1], "attempt to add to full pile")
+		assert(CONFIG.CardDecorators[#state + 1], "attempt to add to full pile")
 		-- any key can be used to grab the suit of the pile
-		local suit = Cards:getSuit(keys[1])
+		local suit = Cards:getSuit(state[#state].signature)
 		local playerId = tostring(action.playerId)
-		return Llama.Dictionary.join(state, {
-			[Cards:getSignature(suit, #keys + 1)] = playerId
+		return Llama.List.push(state, {
+			playerId = playerId;
+			signature = Cards:getSignature(suit, #state + 1);
 		})
 	end
 

@@ -25,14 +25,11 @@ function Pile:render()
 
 	local RNG = Random.new(getSeedFromString(id))
 	local cardObjects = {}
-	local index = 0
 
-	for cardSignature, _playerId in pairs(cards) do
-		index += 1
-
+	for index, card in pairs(cards) do
 		-- face-down if no more cards can be added to the pile
 		local direction = Enums.CardDirection.Up
-		local value = Cards:getValue(cardSignature)
+		local value = Cards:getValue(card.signature)
 		if not CONFIG.CardDecorators[value + 1] then
 			direction = Enums.CardDirection.Down
 		end
@@ -48,7 +45,7 @@ function Pile:render()
 			onClick = callback;
 			position = UDim2.new(0.5, 0, 0.5, 0);
 			rotation = RNG:NextInteger(0, 359);
-			signature = cardSignature;
+			signature = card.signature;
 			zIndex = index;
 		})
 	end

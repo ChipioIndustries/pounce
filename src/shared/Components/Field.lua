@@ -38,7 +38,7 @@ function Field:render()
 			onClick = function()
 				local selection = Store:getState().selection
 				if selection then
-					moveCardToPile:InvokeServer(id, selection.origin, selection.column)
+					print(moveCardToPile:InvokeServer(id, selection.origin, selection.column))
 					wipeSelection()
 				end
 			end;
@@ -70,11 +70,10 @@ function Field:render()
 					local mouseX = -hit.Z
 					local mouseY = hit.X
 					position = UDim2.new(studsToScale(mouseX), 0, studsToScale(mouseY), 0)
-					print(mouseX, mouseY, position)
 				end
 				moveCardToPile:InvokeServer(nil, selection.origin, selection.column, position)
-				wipeSelection()
 			end
+			wipeSelection()
 		end;
 	}, cardPiles)
 end

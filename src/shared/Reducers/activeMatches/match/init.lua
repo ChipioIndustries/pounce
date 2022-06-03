@@ -24,8 +24,10 @@ local function matchReducer(state, action)
 			field = Llama.Dictionary.join(state.field, {
 				[action.pileId] = {
 					cards = {
-						-- TODO: restructure this so order is preserved and iteratable
-						[Cards:getSignature(action.suit, 1)] = tostring(action.playerId)
+						[1] = {
+							playerId = tostring(action.playerId);
+							signature = Cards:getSignature(action.suit, 1);
+						}
 					},
 					position = action.position
 				}
@@ -34,9 +36,9 @@ local function matchReducer(state, action)
 	elseif action.type == Actions.changeField then
 		return Llama.Dictionary.join(state, {
 			field = Llama.Dictionary.join(state.field, {
-				[action.pileId] = Llama.Dictionary.join(state[action.pileId], {
+				[action.pileId] = Llama.Dictionary.join(state.field[action.pileId], {
 					cards = pileReducer(
-						state[action.pileId].cards,
+						state.field[action.pileId].cards,
 						action.subAction
 					)
 				})

@@ -17,8 +17,10 @@ local function activeMatchesReducer(state, action)
 	if action.type == Actions.addMatch then
 		local players = {}
 
+		local RNG = Random.new(action.seed)
+
 		for _, playerId in ipairs(action.playerIds) do
-			local deck = Cards:shuffle(nil, action.seed)
+			local deck = Cards:shuffle(nil, RNG)
 
 			local stack = {}
 			for _ = 1, CONFIG.StackSize do

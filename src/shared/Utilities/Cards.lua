@@ -5,6 +5,7 @@ local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local Cards = {}
 
 function Cards:getColor(signature, _colorsOverride)
+	assert(typeof(signature) == "string", "Expected signature, got number")
 	local colors = _colorsOverride or CONFIG.CardColors
 	local suit = self:getSuit(signature)
 	for color, letters in pairs(colors) do
@@ -39,9 +40,8 @@ function Cards:makeDeck(_configOverride)
 	return deck
 end
 
-function Cards:shuffle(deck, seed, _configOverride)
-	seed = seed or tick()
-	local RNG = Random.new(seed)
+function Cards:shuffle(deck, RNG, _configOverride)
+	RNG = RNG or Random.new(tick())
 
 	if not deck then
 		deck = self:makeDeck(_configOverride)

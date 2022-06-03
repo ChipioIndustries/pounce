@@ -44,7 +44,7 @@ local function moveCardToPile(player, targetPileId, origin, columnIndex, pilePos
 	if targetPileId then
 		-- existing pile
 		local pile = matchData.field[targetPileId]
-		local topCard = pile[#pile]
+		local topCard = pile.cards[#pile.cards].signature
 
 		success, result = isCardAscendingAndSameSuit(topCard, originCard)
 
