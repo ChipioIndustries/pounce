@@ -38,7 +38,7 @@ function Field:render()
 			onClick = function()
 				local selection = Store:getState().selection
 				if selection then
-					print(moveCardToPile:InvokeServer(id, selection.origin, selection.column))
+					moveCardToPile:InvokeServer(id, selection.origin, selection.column)
 					wipeSelection()
 				end
 			end;

@@ -16,10 +16,10 @@ local function moveCardToColumn(matchId, playerId, columnIndex, origin)
 		local playerData = store:getState().activeMatches[matchId].players[playerId]
 		local cardSuit
 		if origin == Enums.CardOrigin.Deck then
-			cardSuit = Selectors.Deck.getTopCard(matchId, playerId)
+			cardSuit = Cards:getSuit(Selectors.Deck.getTopCard(matchId, playerId))
 			store:dispatch(removeCardFromDeck(matchId, playerId))
 		elseif origin == Enums.CardOrigin.Stack then
-			cardSuit = Cards.getSuit(Llama.List.last(playerData.stack))
+			cardSuit = Cards:getSuit(Llama.List.last(playerData.stack))
 			store:dispatch(removeCardFromStack(matchId, playerId))
 		else
 			error("invalid origin")

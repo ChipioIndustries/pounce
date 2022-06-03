@@ -6,7 +6,9 @@ local Enums = require(constants.Enums)
 
 local Roact = require(ReplicatedStorage.Packages.Roact)
 
-local Card = require(ReplicatedStorage.Components.Card)
+local components = ReplicatedStorage.Components
+local Card = require(components.Card)
+local Empty = require(components.Empty)
 
 local Column = Roact.Component:extend("Column")
 
@@ -54,6 +56,12 @@ function Column:render()
 			selected = selectionIndex and index >= selectionIndex;
 			signature = signature;
 			zIndex = index;
+		}))
+	end
+
+	if #cardObjects == 0 then
+		table.insert(cardObjects, Roact.createElement(Empty, {
+			onClick = onClick;
 		}))
 	end
 

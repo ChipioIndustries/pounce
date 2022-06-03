@@ -19,6 +19,7 @@ local setSelectedCard = require(ReplicatedStorage.Actions.setSelectedCard)
 local makeHandleSelectionOr = require(ReplicatedStorage.Utilities.makeHandleSelectionOr)
 
 local advancePlayerDeckPosition = Remotes:getFunctionAsync("advancePlayerDeckPosition")
+local moveCardToColumn = Remotes:getFunctionAsync("moveCardToColumn")
 
 local Inventory = Roact.Component:extend("Inventory")
 
@@ -91,7 +92,11 @@ function Inventory:render()
 			end
 			columnInput = {
 				onClick = makeHandleSelectionOr(function()
-
+					if selection.origin == Enums.CardOrigin.Column then
+						-- TODO from column to column
+					else
+						print(moveCardToColumn:InvokeServer(index, selection.origin))
+					end
 				end, Enums.CardOrigin.Column, index);
 				selectionIndex = selectionIndex;
 			}
