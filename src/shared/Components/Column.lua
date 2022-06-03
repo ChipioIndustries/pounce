@@ -17,6 +17,7 @@ function Column:render()
 	local layoutDirection = props.layoutDirection or Enums.CardLayoutDirection.Vertical
 	local onClick = props.onClick
 	local selectionIndex = props.selectionIndex
+	local sizeOffsetsOverride = props.sizeOffsetsOverride
 	local cardOffset = CONFIG.Interface.CardColumnOffset[layoutDirection]
 
 	local function getOffset(index)
@@ -58,7 +59,7 @@ function Column:render()
 
 	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1;
-		Size = CONFIG.Interface.CardSize + getOffset(#cardObjects - 1)
+		Size = CONFIG.Interface.CardSize + getOffset((sizeOffsetsOverride or #cardObjects) - 1)
 	}, cardObjects)
 end
 
