@@ -87,6 +87,13 @@ local CONFIG = {
 		WrongValue = "This card is too high or low to go here!";
 		WrongSuit = "This card's suit doesn't match!";
 	};
+	Sounds = {
+		Deselect = 9810498077;
+		Error = 160715357;
+		Place = 9810558987;
+		Select = 9810496988;
+		Slide = 9810703505;
+	};
 	Statuses = {
 		GameOver = "Game over, %s won!";
 		Waiting = "Waiting for a match...";

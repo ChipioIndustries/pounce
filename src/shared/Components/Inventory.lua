@@ -10,6 +10,8 @@ local Remotes = require(packages.Remotes)
 local Roact = require(packages.Roact)
 local RoactRodux = require(packages.RoactRodux)
 
+local Sound = require(ReplicatedStorage.Modules.Sound)
+
 local components = ReplicatedStorage.Components
 local Column = require(components.Column)
 local Stack = require(components.Stack)
@@ -68,6 +70,7 @@ function Inventory:render()
 			selected = selection and selection.origin == Enums.CardOrigin.Stack;
 			onClick = function()
 				if #playerData.stack > 0 then
+					Sound:play(CONFIG.Sounds.Select)
 					setSelection(Enums.CardOrigin.Stack)
 				end
 			end;
@@ -100,12 +103,16 @@ function Inventory:render()
 			local callback
 			local function moveToColumnHandler()
 				if selection then
+					local success
 					if selection.origin == Enums.CardOrigin.Column then
 						local originColumn = selection.column
 						local cardCount = #playerData.pad[originColumn] - selection.index + 1
-						moveCardsBetweenColumns:InvokeServer(originColumn, index, cardCount)
+						success = moveCardsBetweenColumns:InvokeServer(originColumn, index, cardCount)
 					else
-						moveCardToColumn:InvokeServer(index, selection.origin)
+						success = moveCardToColumn:InvokeServer(index, selection.origin)
+					end
+					if success then
+						Sound:play(CONFIG.Sounds.Place)
 					end
 					wipeSelection()
 				end
@@ -144,6 +151,7 @@ function Inventory:render()
 	if isLocalPlayer then
 		hiddenDeckInput = {
 			onClick = function()
+				Sound:play(CONFIG.Sounds.Slide)
 				wipeSelection()
 				advancePlayerDeckPosition:InvokeServer()
 			end;

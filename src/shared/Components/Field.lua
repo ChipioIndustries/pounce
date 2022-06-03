@@ -12,7 +12,9 @@ local Remotes = require(packages.Remotes)
 local Roact = require(packages.Roact)
 local RoactRodux = require(packages.RoactRodux)
 
-local Store = require(ReplicatedStorage.Modules.Store)
+local modules = ReplicatedStorage.Modules
+local Sound = require(modules.Sound)
+local Store = require(modules.Store)
 
 local Selectors = require(ReplicatedStorage.Selectors)
 
@@ -38,7 +40,12 @@ function Field:render()
 			onClick = function()
 				local selection = Store:getState().selection
 				if selection then
-					moveCardToPile:InvokeServer(id, selection.origin, selection.column)
+					local success = moveCardToPile:InvokeServer(id, selection.origin, selection.column)
+					if success then
+						Sound:play(CONFIG.Sounds.Place)
+					else
+						Sound:play(CONFIG.Sounds.Deselect)
+					end
 					wipeSelection()
 				end
 			end;
@@ -55,6 +62,7 @@ function Field:render()
 		ZIndex = 2;
 		[Roact.Event.Activated] = function()
 			local selection = Store:getState().selection
+			local success
 			if selection then
 				local tableInstance = CollectionService:GetTagged(CONFIG.TableTag)[1]
 				local tablePosition = tableInstance.Position
@@ -71,7 +79,12 @@ function Field:render()
 					local mouseY = hit.X
 					position = UDim2.new(studsToScale(mouseX), 0, studsToScale(mouseY), 0)
 				end
-				moveCardToPile:InvokeServer(nil, selection.origin, selection.column, position)
+				success = moveCardToPile:InvokeServer(nil, selection.origin, selection.column, position)
+			end
+			if success then
+				Sound:play(CONFIG.Sounds.Place)
+			else
+				Sound:play(CONFIG.Sounds.Deselect)
 			end
 			wipeSelection()
 		end;
