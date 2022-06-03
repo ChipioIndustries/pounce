@@ -31,6 +31,8 @@ local CONFIG = {
 		"D";
 	};
 	CameraPosition = CFrame.new(5, 8, 0, 0, -0.87, 0.5, 0, 0.5, 0.87, -1, 0, 0);
+	CardPositionCacheFlushRate = 5;
+	CardPositionCacheLifetime = 5;
 	DeckSize = 52;
 	DeckViewableCardsCount = 3;
 	Images = {
@@ -67,7 +69,7 @@ local CONFIG = {
 	};
 	PadCount = 5;
 	StackSize = 13;
-	MatchIntermission = 10;
+	MatchIntermission = 1;
 	MaxPlayers = 4;
 	MinPlayers = 1;
 	-- based on card length = 80 and field size = 600

@@ -7,7 +7,9 @@ local packages = ReplicatedStorage.Packages
 local Roact = require(packages.Roact)
 local RoactRodux = require(packages.RoactRodux)
 
-local Inventory = require(ReplicatedStorage.Components.Inventory)
+local components = ReplicatedStorage.Components
+local Inventory = require(components.Inventory)
+local InventoryContext = require(components.InventoryContext)
 
 local Selectors = require(ReplicatedStorage.Selectors)
 
@@ -24,10 +26,16 @@ function Inventories:render()
 
 	if matchData then
 		local function addData(playerId, playerData, playerIndex)
-			inventories[playerId] = Roact.createElement(Inventory, {
-				isLocalPlayer = playerId == tostring(player.UserId);
-				playerData = playerData;
-				rotationIndex = playerIndex;
+			inventories[playerId] = Roact.createElement(InventoryContext.Provider, {
+				value = {
+					playerId = playerId
+				}
+			}, {
+				Roact.createElement(Inventory, {
+					isLocalPlayer = playerId == tostring(player.UserId);
+					playerData = playerData;
+					rotationIndex = playerIndex;
+				})
 			})
 		end
 

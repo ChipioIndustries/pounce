@@ -43,6 +43,7 @@ function Pile:render()
 			anchorPoint = Vector2.new(0.5, 0.5);
 			direction = direction;
 			onClick = callback;
+			playerId = card.playerId;
 			position = UDim2.new(0.5, 0, 0.5, 0);
 			rotation = RNG:NextInteger(0, 359);
 			signature = card.signature;

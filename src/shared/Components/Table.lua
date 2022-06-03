@@ -11,11 +11,14 @@ local components = ReplicatedStorage.Components
 local Field = require(components.Field)
 local Inventories = require(components.Inventories)
 local TableBackground = require(components.TableBackground)
+local TableContext = require(components.TableContext)
 local Quit = require(components.Quit)
 
 local Table = Roact.Component:extend("Table")
 
 function Table:init()
+	self.guiRef = Roact.createRef()
+
 	self.maid = Maid.new()
 	self.adornee, self.setAdornee = Roact.createBinding(nil)
 
@@ -30,20 +33,27 @@ function Table:init()
 end
 
 function Table:render()
-	return Roact.createElement("SurfaceGui", {
-		Adornee = self.adornee;
-		ClipsDescendants = true;
-		Face = Enum.NormalId.Top;
-		LightInfluence = 1;
-		PixelsPerStud = 100;
-		ResetOnSpawn = false;
-		SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud;
-		ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+	return Roact.createElement(TableContext.Provider, {
+		value = {
+			surfaceGuiRef = self.guiRef;
+		}
 	}, {
-		Background = Roact.createElement(TableBackground);
-		Field = Roact.createElement(Field);
-		Inventories = Roact.createElement(Inventories);
-		Quit = Roact.createElement(Quit);
+		Table = Roact.createElement("SurfaceGui", {
+			Adornee = self.adornee;
+			ClipsDescendants = true;
+			Face = Enum.NormalId.Top;
+			LightInfluence = 1;
+			PixelsPerStud = 100;
+			ResetOnSpawn = false;
+			SizingMode = Enum.SurfaceGuiSizingMode.PixelsPerStud;
+			ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
+			[Roact.Ref] = self.guiRef;
+		}, {
+			Background = Roact.createElement(TableBackground);
+			Field = Roact.createElement(Field);
+			Inventories = Roact.createElement(Inventories);
+			Quit = Roact.createElement(Quit);
+		})
 	})
 end
 
