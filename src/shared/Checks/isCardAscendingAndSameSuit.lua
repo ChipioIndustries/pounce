@@ -4,7 +4,7 @@ local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local Cards = require(ReplicatedStorage.Utilities.Cards)
 
 local function isCardAscendingAndSameSuit(signatureA, signatureB)
-	if Cards:getSignature(signatureA) ~= Cards:getSignature(signatureB) then
+	if Cards:getSuit(signatureA) ~= Cards:getSuit(signatureB) then
 		return false, CONFIG.Responses.WrongSuit
 	end
 	-- B should be 1 higher than A

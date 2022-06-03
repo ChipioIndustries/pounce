@@ -23,8 +23,9 @@ local function matchReducer(state, action)
 	elseif action.type == Actions.addPile then
 		return Llama.Dictionary.join(state, {
 			field = Llama.Dictionary.join(state.field, {
-				[HttpService:GenerateGUID(false)] = {
+				[action.pileId] = {
 					cards = {
+						-- TODO: restructure this so order is preserved and iteratable
 						[Cards:getSignature(action.suit, 1)] = tostring(action.playerId)
 					},
 					position = action.position

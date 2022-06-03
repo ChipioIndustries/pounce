@@ -18,6 +18,8 @@ local Selectors = require(ReplicatedStorage.Selectors)
 
 local Pile = require(ReplicatedStorage.Components.Pile)
 
+local setSelectedCard = require(ReplicatedStorage.Actions.setSelectedCard)
+
 local moveCardToPile = Remotes:getFunctionAsync("moveCardToPile")
 
 local Field = Roact.Component:extend("Field")
@@ -25,6 +27,7 @@ local Field = Roact.Component:extend("Field")
 function Field:render()
 	local props = self.props
 	local piles = props.piles or {}
+	local wipeSelection = props.wipeSelection
 
 	local cardPiles = {}
 
@@ -33,7 +36,11 @@ function Field:render()
 			cards = pile.cards;
 			id = id;
 			onClick = function()
-				-- TODO: add selected card to pile
+				local selection = Store:getState().selection
+				if selection then
+					moveCardToPile:InvokeServer(id, selection.origin, selection.column)
+					wipeSelection()
+				end
 			end;
 			position = pile.position;
 		})
@@ -66,6 +73,7 @@ function Field:render()
 					print(mouseX, mouseY, position)
 				end
 				moveCardToPile:InvokeServer(nil, selection.origin, selection.column, position)
+				wipeSelection()
 			end
 		end;
 	}, cardPiles)
@@ -77,6 +85,13 @@ Field = RoactRodux.connect(
 		local piles = match and match.field
 		return {
 			piles = piles;
+		}
+	end,
+	function(dispatch)
+		return {
+			wipeSelection = function()
+				dispatch(setSelectedCard())
+			end
 		}
 	end
 )(Field)

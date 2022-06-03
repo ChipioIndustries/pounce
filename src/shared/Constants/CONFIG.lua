@@ -65,7 +65,7 @@ local CONFIG = {
 		TextFont = Enum.Font.FredokaOne;
 		Title = "pounce!";
 	};
-	PadCount = 4;
+	PadCount = 12;
 	StackSize = 13;
 	MatchIntermission = 1;
 	MaxPlayers = 4;
