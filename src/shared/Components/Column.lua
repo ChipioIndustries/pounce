@@ -27,6 +27,7 @@ function Column:render()
 
 			local playerId = context.playerId
 
+			-- give a different offset based on whether the cards are laid vertical or horizontal
 			local function getOffset(index)
 				index = math.max(index, 0)
 				local offset = cardOffset * index
@@ -65,6 +66,8 @@ function Column:render()
 				}))
 			end
 
+			-- create a shadow if there are no cards in the column,
+			-- this also acts as an input catcher
 			if #cardObjects == 0 then
 				table.insert(cardObjects, Roact.createElement(Empty, {
 					onClick = onClick;

@@ -14,6 +14,7 @@ local function moveCardToColumn(matchId, playerId, columnIndex, origin)
 	return function(store)
 		local playerData = store:getState().activeMatches[matchId].players[playerId]
 		local card
+		-- remove card from the requested spot
 		if origin == Enums.CardOrigin.Deck then
 			card = Selectors.Deck.getTopCard(matchId, playerId)
 			store:dispatch(removeCardFromDeck(matchId, playerId))

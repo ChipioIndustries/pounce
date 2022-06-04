@@ -16,6 +16,7 @@ local function moveCardToPile(matchId, playerId, targetPileId, origin, columnInd
 	return function(store)
 		local playerData = store:getState().activeMatches[matchId].players[playerId]
 		local suit
+		-- remove card from the requested spot
 		if origin == Enums.CardOrigin.Column then
 			local column = playerData.pad[columnIndex]
 			suit = Cards:getSuit(column[#column])
@@ -27,6 +28,7 @@ local function moveCardToPile(matchId, playerId, targetPileId, origin, columnInd
 			suit = Cards:getSuit(playerData.stack[#playerData.stack])
 			store:dispatch(removeCardFromStack(matchId, playerId))
 		end
+		-- create a new pile or add to an existing one
 		if not targetPileId then
 			store:dispatch(addPile(matchId, playerId, suit, pilePosition))
 		else

@@ -5,6 +5,11 @@ local Selectors = require(ReplicatedStorage.Selectors)
 local Store = require(ReplicatedStorage.Modules.Store)
 local check = require(ReplicatedStorage.Checks.playerInMatch)
 
+--[[
+	is the player in a match?
+	has the match ended?
+]]
+
 local function isMatchActive(player)
 	local success, result = check(player)
 

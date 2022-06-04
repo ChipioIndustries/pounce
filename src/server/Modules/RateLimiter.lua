@@ -10,7 +10,13 @@ local Remotes = require(packages.Remotes)
 
 local Secrets = require(ServerScriptService.Secrets)
 
-local buckets = {}
+local buckets = {
+	--[[
+		each player has a table of leaky buckets
+		corresponding to each remote. if a bucket
+		overflows the call is dropped to prevent spam.
+	]]
+}
 
 local function rateLimiter(arguments, metadata)
 	local playerId = arguments[1].UserId

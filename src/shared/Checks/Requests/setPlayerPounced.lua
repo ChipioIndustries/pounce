@@ -6,6 +6,11 @@ local Selectors = require(ReplicatedStorage.Selectors)
 local Store = require(ReplicatedStorage.Modules.Store)
 local check = require(ReplicatedStorage.Checks.isMatchActive)
 
+--[[
+	is the match active?
+	has the player emptied their stack?
+]]
+
 local function pounce(player)
 	player = player or Players.LocalPlayer
 

@@ -38,6 +38,7 @@ function Field:render()
 			cards = pile.cards;
 			id = id;
 			onClick = function()
+				-- attempt to move the selected card to this pile
 				local selection = Store:getState().selection
 				if selection then
 					local success = moveCardToPile:InvokeServer(id, selection.origin, selection.column)
@@ -64,6 +65,8 @@ function Field:render()
 			local selection = Store:getState().selection
 			local success
 			if selection then
+				-- convert the mouse CFrame into a 2D scale so we
+				-- know where to position the pile
 				local tableInstance = CollectionService:GetTagged(CONFIG.TableTag)[1]
 				local tablePosition = tableInstance.Position
 				local tableSize = tableInstance.Size.X

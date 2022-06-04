@@ -13,6 +13,16 @@ local isMatchActive = require(checks.isMatchActive)
 local isCardAscendingAndSameSuit = require(checks.isCardAscendingAndSameSuit)
 local isPilePositionOk = require(checks.isPilePositionOk)
 
+--[[
+	is the match active?
+	does the origin card exist?
+	if there's an existing pile:
+		does the origin card match suit and ascend in value?
+	if there isn't:
+		is the origin card an ace?
+		is the requested position spaced out enough?
+]]
+
 local function moveCardToPile(player, targetPileId, origin, columnIndex, pilePosition)
 	player = player or Players.LocalPlayer
 

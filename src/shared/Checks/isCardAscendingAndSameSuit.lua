@@ -3,6 +3,11 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local Cards = require(ReplicatedStorage.Utilities.Cards)
 
+--[[
+	is card B 1 value higher than A?
+	are the cards the same suit?
+]]
+
 local function isCardAscendingAndSameSuit(signatureA, signatureB)
 	if Cards:getSuit(signatureA) ~= Cards:getSuit(signatureB) then
 		return false, CONFIG.Responses.WrongSuit

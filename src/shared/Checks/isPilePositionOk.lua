@@ -8,6 +8,10 @@ local function pythagoreanTheorem(a, b)
 	return math.sqrt(a^2 + b^2)
 end
 
+--[[
+	is the indended position too close to any of the existing piles?
+]]
+
 local function isPilePositionOk(matchId, position, _fieldOverride)
 	local piles = _fieldOverride or Store:getState().activeMatches[matchId].field
 

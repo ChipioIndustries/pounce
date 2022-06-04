@@ -1,3 +1,7 @@
+--[[
+	generates remotes for the player to invoke based on the
+	check modules located in shared/Checks/Requests
+]]
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 
@@ -12,9 +16,11 @@ for requestName, requestCheck in pairs(RequestChecks) do
 	local remote = Remotes:getFunctionAsync(requestName)
 
 	local function processRequest(...)
+		-- ensure the move is valid
 		local success, result = requestCheck(...)
 
 		if success then
+			-- inject the match ID and player ID into the arguments before dispatching
 			local arguments = {...}
 			local playerId = tostring(arguments[1].UserId)
 			local matchId = Selectors.getMatchIdByPlayerId(playerId)

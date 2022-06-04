@@ -8,8 +8,8 @@ local App = Roact.Component:extend("App")
 
 function App:render()
 	return Roact.createFragment({
-		Table = Roact.createElement(Table),
-		HUD = Roact.createElement("ScreenGui")
+		-- I kind of expected to put more stuff in here lol
+		Table = Roact.createElement(Table)
 	})
 end
 

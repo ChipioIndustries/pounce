@@ -4,6 +4,7 @@ local ServerScriptService = game:GetService("ServerScriptService")
 local Store = require(ReplicatedStorage.Modules.Store)
 local removeMatch = require(ServerScriptService.Actions.removeMatch)
 
+-- delete matches where all players have quit
 local function matchCleanup(matches, _oldMatches)
 	for matchId, match in pairs(matches) do
 		local isMatchEmpty = true

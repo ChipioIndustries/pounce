@@ -19,7 +19,13 @@ local TableContext = require(components.TableContext)
 local Card = Roact.Component:extend("Card")
 
 function Card:init()
+	-- the card itself is ref'd so we can cache the position
+	-- for when the card moves
 	self.instance = Roact.createRef()
+
+	-- before the card has moved to its final position, we need
+	-- to place a target object at its goal so we can get an
+	-- AbsolutePosition that can be passed to the motor
 	self.targetInstance = Roact.createRef()
 
 	local props = self.props
@@ -30,23 +36,30 @@ function Card:init()
 
 	if cachedPosition then
 		self:setState({
+			-- this renders the card within a portal so it can fly around the table
 			needsAnimation = true
 		})
+
 		self.startPosition = cachedPosition
 		self.position, self.setPosition = Roact.createBinding(UDim2.new(0, cachedPosition.position.X, 0, cachedPosition.position.Y))
 		self.rotation, self.setRotation = Roact.createBinding(cachedPosition.rotation)
+
 		self.motor = Flipper.GroupMotor.new({
 			rotation = cachedPosition.rotation;
 			X = cachedPosition.position.X;
 			Y = cachedPosition.position.Y;
 		})
+
 		self.motor:onStep(function(values)
 			self.setPosition(UDim2.new(0, values.X, 0, values.Y))
 			self.setRotation(values.rotation)
 		end)
+
 		self.motor:onComplete(function()
+			-- wipe the bindings so the next render will use the prop values instead
 			self.position = nil
 			self.rotation = nil
+			-- force a re-render
 			self:setState({
 				needsAnimation = false
 			})
@@ -72,6 +85,7 @@ function Card:render()
 	local additionalProps
 
 	if direction == Enums.CardDirection.Up then
+		-- add UI elements for the face-up version of the card
 		additionalProps = {
 			BackgroundColor3 = Color3.new(1, 1, 1);
 		}
@@ -92,17 +106,20 @@ function Card:render()
 			});
 		}
 	elseif direction == Enums.CardDirection.Down then
+		-- card is face down, so just give it a back color. lame
 		additionalProps = {
 			BackgroundColor3 = CONFIG.Interface.CardBackColor;
 		}
 		additionalChildren = {}
 	end
 
+	-- highlight the card if selected
 	local strokeColor = Color3.new(0, 0, 0)
 	if selected then
 		strokeColor = Color3.new(1, 0.9, 0)
 	end
 
+	-- create the actual card element using the previously created props
 	local cardElement = Roact.createElement("Frame",
 		Llama.Dictionary.join(
 			{
@@ -133,6 +150,8 @@ function Card:render()
 		)
 	)
 
+	-- if animating, embed the card in a portal with a target frame
+	-- else, just give the plain card
 	if needsAnimation then
 		return Roact.createFragment({
 			consumer = Roact.createElement(TableContext.Consumer, {
@@ -158,8 +177,10 @@ function Card:render()
 end
 
 function Card:didMount()
-	-- wait for UI layouts to move cards
+	-- using defer makes sure any UI constraints have modified the card
+	-- positions in whatever way they will
 	task.defer(function()
+		-- get the target position and start the animation
 		local targetInstance = self.targetInstance:getValue()
 		if targetInstance then
 			self.motor:setGoal({
@@ -172,6 +193,7 @@ function Card:didMount()
 end
 
 function Card:didUpdate()
+	-- cache the card position
 	task.defer(function()
 		local props = self.props
 		local playerId = props.playerId

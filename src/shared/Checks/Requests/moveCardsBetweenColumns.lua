@@ -10,6 +10,12 @@ local checks = ReplicatedStorage.Checks
 local isMatchActive = require(checks.isMatchActive)
 local isCardDescendingAndAlternating = require(checks.isCardDescendingAndAlternating)
 
+--[[
+	is the match active?
+	did the user not try to move too many cards?
+	if there's an existing card at the target, is it descending and alternating?
+]]
+
 local function moveCardsBetweenColumns(player, columnIndexA, columnIndexB, cardCount)
 	player = player or Players.LocalPlayer
 
