@@ -23,7 +23,8 @@ function Cards:getSuit(signature)
 	return signature:sub(1, 1)
 end
 
-function Cards:getValue(signature)
+function Cards:getValue(signature: string)
+	assert(#signature > 1)
 	return tonumber(signature:sub(2))
 end
 
