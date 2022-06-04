@@ -17,7 +17,7 @@ end
 addReducers(sharedReducers)
 
 if RunService:IsServer() then
-	addReducers(ServerScriptService.Reducers or Instance.new("Folder"))
+	addReducers(ServerScriptService:FindFirstChild("Reducers") or Instance.new("Folder"))
 end
 
 return Rodux.combineReducers(reducers)
