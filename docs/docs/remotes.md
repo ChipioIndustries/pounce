@@ -26,7 +26,7 @@ Rodux actions can be exposed to players as RemoteFunctions. These remotes are ra
 
 Create an action in `server/Actions` that you want the player to be able to invoke. These actions will receive the match ID, the player ID, and then any arguments provided by the player.
 
-## Creating Checks
+### Creating Checks
 
 Create a check module in `shared/Checks/Requests`. This module will only receive the exact arguments provided by the remote (e.g. if the player invokes the function passing through 1 argument, the check will receive the player object and the argument). The check should verify that the user input is valid and there is no way the player would be breaking the game. In the end, the check should return true if the request is valid. If the request is invalid, the check should return false and the reason for the failure.
 
