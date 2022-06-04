@@ -6,12 +6,17 @@ local Store = require(ReplicatedStorage.Modules.Store)
 local function getMatchByPlayerId(playerId, _matchesOverride)
 	playerId = playerId or tostring(Players.LocalPlayer.UserId)
 	local matches = _matchesOverride or Store:getState().activeMatches
+	local lastQuitMatch
 	for _, match in pairs(matches) do
 		if match.players[playerId] then
-			return match
+			if match.players[playerId].quit then
+				lastQuitMatch = match
+			else
+				return match
+			end
 		end
 	end
-	return nil
+	return lastQuitMatch
 end
 
 return getMatchByPlayerId

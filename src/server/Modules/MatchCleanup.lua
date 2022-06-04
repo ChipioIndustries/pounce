@@ -1,8 +1,12 @@
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 
 local Store = require(ReplicatedStorage.Modules.Store)
 local removeMatch = require(ServerScriptService.Actions.removeMatch)
+local setPlayerQuit = require(ServerScriptService.Actions.setPlayerQuit)
+
+local Selectors = require(ReplicatedStorage.Selectors)
 
 -- delete matches where all players have quit
 local function matchCleanup(matches, _oldMatches)
@@ -19,6 +23,15 @@ local function matchCleanup(matches, _oldMatches)
 	end
 end
 
+local function onPlayerRemoving(player)
+	local playerId = tostring(player.UserId)
+	local matchId = Selectors.getMatchIdByPlayerId(playerId)
+	if matchId then
+		Store:dispatch(setPlayerQuit(matchId, playerId))
+	end
+end
+
 Store:getValueChangedSignal("activeMatches"):connect(matchCleanup)
+Players.PlayerRemoving:Connect(onPlayerRemoving)
 
 return matchCleanup

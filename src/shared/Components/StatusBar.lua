@@ -28,7 +28,7 @@ function StatusBar:render()
 		local matchId = Selectors.getMatchIdByPlayerId()
 		local matchWinner = Selectors.getMatchWinner(matchId)
 		if matchWinner then
-			local winningPlayer = getPlayerByPlayerId(matchWinner)
+			local winningPlayer = getPlayerByPlayerId(matchWinner) or { DisplayName = "Someone" }
 			local winnerName = if winningPlayer == player then "You" else winningPlayer.DisplayName
 			text = CONFIG.Statuses.GameOver:format(winnerName)
 		end
