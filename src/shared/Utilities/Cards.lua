@@ -24,7 +24,7 @@ function Cards:getSuit(signature)
 end
 
 function Cards:getValue(signature: string)
-	assert(#signature > 1)
+	assert(#signature > 1, "Expected signature, got suit")
 	return tonumber(signature:sub(2))
 end
 
