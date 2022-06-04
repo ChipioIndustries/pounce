@@ -4,6 +4,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = Players.LocalPlayer
 
 local packages = ReplicatedStorage.Packages
+local Llama = require(packages.Llama)
 local Roact = require(packages.Roact)
 local RoactRodux = require(packages.RoactRodux)
 
@@ -42,10 +43,13 @@ function Inventories:render()
 		-- ensure localplayer gets 1st position
 		addData(localPlayerId, matchData.players[localPlayerId], index)
 
-		for playerId, playerData in pairs(matchData.players) do
+		local sortedPlayerIds = Llama.Dictionary.keys(matchData.players)
+		table.sort(sortedPlayerIds)
+
+		for _, playerId in ipairs(sortedPlayerIds) do
 			if playerId ~= localPlayerId then
 				index += 1
-				addData(playerId, playerData, index)
+				addData(playerId, matchData.players[playerId], index)
 			end
 		end
 	end
