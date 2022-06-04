@@ -57,7 +57,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'dev-setup',
             position: 'left',
             label: 'Get Started',
           },
@@ -86,6 +86,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+		additionalLanguages: ['lua'],
       },
     }),
 };
