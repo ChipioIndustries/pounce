@@ -5,7 +5,7 @@ title: State Outline
 
 # State Outline
 
-This project uses Rodux, a library for centralizing game state.
+This project uses Rodux, a library for centralizing game state. The store state matches the following structure:
 
 ```lua
 local state = {
@@ -43,15 +43,28 @@ local state = {
 			field = {
 				["GUID"] = {
 					cards = {
-						["A1"] = "id1",
-						["A2"] = "id2",
-						["A3"] = "id3",
-						["A4"] = "id4",
+						[1] = {
+							playerId = "id1",
+							signature = "A1"
+						};
+						[2] = {
+							playerId = "id2",
+							signature = "A2"
+						};
+						[3] = {
+							playerId = "id1",
+							signature = "A3"
+						};
 					},
 					position = UDim2.new(),
 				}
 			}
 		}
+	};
+	selection = {
+		origin = Enums.CardOrigin.Column;
+		column = 4;
+		index = 2;
 	}
 }
 
