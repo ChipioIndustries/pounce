@@ -24,6 +24,7 @@ local CONFIG = {
 		[12] = "Q";
 		[13] = "K";
 	};
+	-- suits must be 1 character
 	CardSuits = {
 		"A";
 		"B";

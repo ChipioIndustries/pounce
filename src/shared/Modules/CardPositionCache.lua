@@ -5,6 +5,11 @@ local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local CardPositionCache = {}
 local cache = {}
 
+--[[
+	cache positions of cards so when a card appears,
+	it knows where its animation start point should be
+]]
+
 function CardPositionCache:_flush()
 	for key, data in pairs(cache) do
 		if tick() - data.timestamp > CONFIG.CardPositionCacheLifetime then

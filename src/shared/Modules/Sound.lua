@@ -6,6 +6,12 @@ local CONFIG = require(ReplicatedStorage.Constants.CONFIG)
 local Sound = {}
 local cache = {}
 
+--[[
+	creates and preloads all sound IDs in CONFIG.Sounds.
+	play() clones the target sound so they can cascade over
+	each other if needed.
+]]
+
 local function cacheSound(id)
 	if not cache[id] then
 		local newSound = Instance.new("Sound")

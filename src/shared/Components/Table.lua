@@ -16,6 +16,8 @@ local Quit = require(components.Quit)
 
 local Table = Roact.Component:extend("Table")
 
+-- Table component automatically binds to the first instance tagged through collectionservice.
+
 function Table:init()
 	self.guiRef = Roact.createRef()
 

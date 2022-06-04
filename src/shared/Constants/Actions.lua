@@ -34,6 +34,8 @@ local Actions = {
 	setSelectedCard = "setSelectedCard";
 }
 
+-- throw an error when attempting to read an invalid action
+-- I learned the hard way this fails silently otherwise
 setmetatable(Actions, {
 	__index = function()
 		error("Attempt to read nonexistent action name")

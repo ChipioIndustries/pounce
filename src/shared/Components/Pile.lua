@@ -23,6 +23,8 @@ function Pile:render()
 	local onClick = props.onClick
 	local position = props.position
 
+	-- RNG is based on pile GUID so all of the rotations
+	-- are preserved when re-rendering
 	local RNG = Random.new(getSeedFromString(id))
 	local cardObjects = {}
 
