@@ -13,13 +13,13 @@ local state = {
 		["GUID"] = {
 			players = {
 				["id1"] = {
-					stack = {
+					stack = { -- column the player needs to empty to win
 						"A2",
 						"A10",
 						"D4",
 						"D1"
 					},
-					pad = {
+					pad = { -- AKA columns
 						[1] = {
 							"A13",
 							"D12",
@@ -40,7 +40,7 @@ local state = {
 					quit = false,
 				}
 			},
-			field = {
+			field = { -- AKA piles
 				["GUID"] = {
 					cards = {
 						[1] = {
@@ -61,11 +61,24 @@ local state = {
 			}
 		}
 	};
-	selection = {
+	selection = { -- can be nil. client-exclusive.
 		origin = Enums.CardOrigin.Column;
-		column = 4;
-		index = 2;
+		column = 4; --optional
+		index = 2; --optional
 	}
 }
-
 ```
+
+## Player Ids
+
+Player Ids are `UserId`s converted to strings. This is done because using numbers as non-sequential keys is a nightmare for replication and iteration in general.
+
+## Card Signatures
+
+Card signatures are short strings consisting of a card's suit and value combined together. Suits are single characters, and values are numbers.
+
+|Suit|Value|Signature|
+|-|-|-|
+|A|Q|`"A12"`|
+|D|4|`"D4"`|
+|C|1|`"C1"`|
