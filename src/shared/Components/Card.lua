@@ -116,7 +116,7 @@ function Card:render()
 	-- highlight the card if selected
 	local strokeColor = Color3.new(0, 0, 0)
 	if selected then
-		strokeColor = Color3.new(1, 0.9, 0)
+		strokeColor = CONFIG.Interface.CardSelectionColor
 	end
 
 	-- create the actual card element using the previously created props

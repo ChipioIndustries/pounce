@@ -52,6 +52,7 @@ local CONFIG = {
 			["black"] = Color3.new(0, 0, 0);
 			["red"] = Color3.new(1, 0.2, 0.2);
 		};
+		CardSelectionColor = Color3.new(1, 0.9, 0);
 		CardSize = UDim2.new(0, 60, 0, 80);
 		CardColumnOffset = {
 			Horizontal = 12;
