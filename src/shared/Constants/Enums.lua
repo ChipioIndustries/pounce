@@ -1,9 +1,4 @@
 local Enums = {
-	CardOrigin = {
-		Column = "Column";
-		Deck = "Deck";
-		Stack = "Stack";
-	};
 	CardDirection = {
 		Up = "Up";
 		Down = "Down";
@@ -11,6 +6,11 @@ local Enums = {
 	CardLayoutDirection = {
 		Horizontal = "Horizontal";
 		Vertical = "Vertical";
+	};
+	CardOrigin = {
+		Column = "Column";
+		Deck = "Deck";
+		Stack = "Stack";
 	};
 	Clickable = {
 		All = "All";
